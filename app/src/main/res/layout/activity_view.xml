@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wy="http://schemas.android.com/apk/res/com.ning.demosky"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <com.ning.demosky.view.view.MyView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      wy:line = "3"/>
+</LinearLayout>

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -18,11 +19,11 @@ import com.ning.demosky.R;
 /**
  * Created by yorki on 2016/6/1.
  */
-    public class PullView extends LinearLayout implements View.OnTouchListener {
+public class PullView extends LinearLayout implements View.OnTouchListener {
 
     private View headView;
     private Paint paint;
-    private RectF rectF   = new RectF();
+    private RectF rectF = new RectF();
 
     private float recfY = 0;
 
@@ -42,7 +43,8 @@ import com.ning.demosky.R;
 
     LayoutParams layoutParams;
     ImageView imageView;
-    private void init(Context context){
+
+    private void init(Context context) {
 
         this.setOnTouchListener(this);
 
@@ -53,32 +55,35 @@ import com.ning.demosky.R;
         this.setOrientation(VERTICAL);
 
         imageView = new ImageView(context);
-        layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300);
-        layoutParams.topMargin = -300;
-        imageView.setLayoutParams(layoutParams);
+        LayoutParams layoutParamsImg = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300);
+        layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, -1);
+        layoutParamsImg.topMargin = -300;
+
+        imageView.setLayoutParams(layoutParamsImg);
         imageView.setImageResource(R.mipmap.ic_launcher);
-        addView(imageView,0);
+        addView(imageView, 0);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
-       rectF.set(0,30,getWidth(),recfY);
+        rectF.set(0, 30, getWidth(), recfY);
 
-        canvas.drawRect(rectF,paint);
+        canvas.drawRect(rectF, paint);
     }
 
     float yDown = 0;
     float distance;
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
-        switch (event.getAction()){
+        switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN:
                 yDown = event.getRawY();
 
-                Log.e("ACTION_DOWN","ACTION_DOWN");
+                Log.e("ACTION_DOWN", "ACTION_DOWN");
 
             case MotionEvent.ACTION_MOVE:
 
@@ -86,21 +91,26 @@ import com.ning.demosky.R;
                 float distance = (yDown - event.getRawY()) / 2;
 
                 layoutParams.topMargin = -(int) distance;
+                Log.e("distance",distance + "");
 //                imageView.setLayoutParams(layoutParams);
 
 //                imageView.getLayoutParams() = - (int) distance;
-                imageView.requestLayout();
+                this.requestLayout();
 
-                Log.e("ACTION_MOVE","ACTION_MOVE" + event.getRawY());
-               // postInvalidate();
+                Log.e("ACTION_MOVE", "ACTION_MOVE" + event.getRawY());
+                // postInvalidate();
                 break;
 
             case MotionEvent.ACTION_UP:
 
-                Log.e("ACTION_UP","ACTION_UP");
+                Log.e("ACTION_UP", "ACTION_UP");
+
+                TranslateAnimation translateAnimation = new TranslateAnimation(0,0,event.getRawY() / 2,-300);
+                translateAnimation.setDuration(2000);
+                imageView.startAnimation(translateAnimation);
 
                 layoutParams.topMargin = -300;
-                imageView.setLayoutParams(layoutParams);
+                this.setLayoutParams(layoutParams);
         }
 
         return true;

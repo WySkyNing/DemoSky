@@ -35,7 +35,7 @@ import java.net.URL;
  */
 public class UpDataManager {
 
-    public static final String PATH = "http://218.60.28.101/car/versionType/android_gas_version.xml";
+    public static final String PATH = "http://api.ocarlife.cn/car/versionType/android_store_version.xml";
     private static final int DOWNLOADING = 1;//正在下载
     private static final int DOWNLOAD_FINISH = 2;//下载完成
 

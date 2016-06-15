@@ -9,6 +9,7 @@ import com.ning.demosky.view.mvp.Base.BaseActivity;
 import com.ning.demosky.view.mvp.presenter.MVPPresenter;
 import com.ning.demosky.view.mvp.presenter.NetworkConnectInter;
 import com.ning.demosky.view.mvp.view.ViewInter;
+import com.ning.demosky.view.upapp.UpDataManager;
 
 /**
  * Created by yorki on 2016/6/14.
@@ -25,11 +26,14 @@ public class MVPActivity extends BaseActivity implements ViewInter{
         networkConnectInter = new MVPPresenter(this);
 
         networkConnectInter.starNetRequest(url);
+
+        UpDataManager manager = new UpDataManager(this);
+        manager.checkUpData();
     }
 
     @Override
     public void showLoadData(Object result) {
-        Log.e("result_mvp",result.toString()+"-------");
+        //Log.e("result_mvp",result.toString()+"-------");
     }
 
     @Override

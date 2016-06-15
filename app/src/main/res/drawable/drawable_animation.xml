@@ -2,15 +2,17 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="false">
 
-    <item android:duration="200">
-        <!--层叠显示-->
-        <layer-list>
-            <item android:drawable="@drawable/duihao"/>
-            <item android:drawable="@drawable/kulian"/>
-        </layer-list>
-    </item>
+    <!--<item android:duration="200">-->
+        <!--&lt;!&ndash;层叠显示&ndash;&gt;-->
+        <!--<layer-list>-->
+            <!--<item android:drawable="@drawable/explode_0"/>-->
+            <!--&lt;!&ndash;<item android:drawable="@drawable/kulian"/>&ndash;&gt;-->
+        <!--</layer-list>-->
+    <!--</item>-->
 
 
-    <item android:drawable="@drawable/cuohao" android:duration="200"/>
-
+    <item android:drawable="@drawable/explode_1" android:duration="100"/>
+    <item android:drawable="@drawable/explode_2" android:duration="100"/>
+    <item android:drawable="@drawable/explode_3" android:duration="100"/>
+    <item android:drawable="@drawable/explode_4" android:duration="100"/>
 </animation-list>

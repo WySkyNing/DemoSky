@@ -25,7 +25,6 @@ public class MVPModel implements ModelInter{
             @Override
             public void onResponse(String response) {
 
-                Log.e("a",response + "-------");
                 networkConnectInter.onLodeNetDataCompleted(response);
             }
         }, new Response.ErrorListener() {

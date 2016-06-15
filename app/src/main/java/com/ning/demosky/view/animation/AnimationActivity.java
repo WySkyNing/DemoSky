@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.ning.demosky.R;
 
 /**
- * Created by yorki on 2016/6/7.
+ * Created by wy on 2016/6/7.
  */
 public class AnimationActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,6 +29,7 @@ public class AnimationActivity extends AppCompatActivity implements View.OnClick
     private TextView alpha;       /*透明度*/
     private Button button;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +38,8 @@ public class AnimationActivity extends AppCompatActivity implements View.OnClick
         /**帧动画*/
         ImageView imageView = (ImageView) this.findViewById(R.id.animation_activity_image_view);
 
-        assert imageView != null : "-----------------imageView == null";
-        imageView.setBackgroundResource(R.drawable.drawable_animation);
+        assert imageView != null : "AnimationActivity-----------------imageView == null";
+       // imageView.setBackgroundResource(R.drawable.drawable_animation);
 
         animationDrawable = (AnimationDrawable) imageView.getBackground();
 
@@ -66,7 +67,6 @@ public class AnimationActivity extends AppCompatActivity implements View.OnClick
             animationDrawable.stop();
             return true;
         }
-
         return super.onTouchEvent(event);
     }
 

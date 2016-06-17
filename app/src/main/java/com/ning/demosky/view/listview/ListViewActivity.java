@@ -11,14 +11,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.ning.demosky.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by yorki on 2016/6/16.
  */
-public class ListViewActivity extends AppCompatActivity{
+public class ListViewActivity extends AppCompatActivity {
 
     private ListView listView;
     private List<DataBean> datas;
@@ -33,7 +35,7 @@ public class ListViewActivity extends AppCompatActivity{
         initView();
     }
 
-    private void initData(){
+    private void initData() {
 
         datas = new ArrayList<>();
 
@@ -46,17 +48,17 @@ public class ListViewActivity extends AppCompatActivity{
     }
 
 
-    private void initView(){
+    private void initView() {
         listView = (ListView) this.findViewById(R.id.list_view);
         adapter = new Adapter();
         listView.setAdapter(adapter);
     }
 
-    private class Adapter extends BaseAdapter{
+    private class Adapter extends BaseAdapter {
 
         private LayoutInflater layoutInflater;
 
-        public Adapter (){
+        public Adapter() {
             layoutInflater = LayoutInflater.from(ListViewActivity.this);
         }
 
@@ -80,40 +82,41 @@ public class ListViewActivity extends AppCompatActivity{
 
             ViewHolder viewHolder = null;
 
-            if (null == convertView){
-                convertView = layoutInflater.inflate(R.layout.item_list_view,parent,false);
+            if (null == convertView) {
+                convertView = layoutInflater.inflate(R.layout.item_list_view, parent, false);
                 viewHolder = new ViewHolder(convertView);
                 convertView.setTag(viewHolder);
-            }else {
+            } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
             viewHolder.textView.setText(datas.get(position).getData());
 
-            if (datas.get(position).getNumber() % 2 != 0){
-                Log.i("list_view_wy",position + "");
-                viewHolder.imageView.setVisibility(View.GONE);
-            }else {
+            if (datas.get(position).getNumber() % 2 != 0) {
+
                 viewHolder.imageView.setVisibility(View.VISIBLE);
+            } else {
+                Log.i("list_view_wy", position + "——");
+                viewHolder.imageView.setVisibility(View.GONE);
             }
 
             return convertView;
         }
     }
 
-    private class ViewHolder{
+    private class ViewHolder {
 
         private TextView textView;
         private ImageView imageView;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             textView = (TextView) view.findViewById(R.id.list_view_item_text_view);
             imageView = (ImageView) view.findViewById(R.id.list_view_item_image_view);
         }
     }
 
 
-    private class DataBean{
+    private class DataBean {
         private int number;
         private String data;
 

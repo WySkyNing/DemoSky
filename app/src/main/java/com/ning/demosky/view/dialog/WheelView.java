@@ -93,7 +93,7 @@ public class WheelView extends ScrollView {
 
     int selectedIndex = 1;
 
-
+    Runnable scrollerTask;
     private void init(Context context) {
         this.context = context;
         Log.d(TAG, "parent: " + this.getParent());
@@ -152,7 +152,7 @@ public class WheelView extends ScrollView {
 
     int initialY;
 
-    Runnable scrollerTask;
+
     int newCheck = 50;
 
     public void startScrollerTask() {

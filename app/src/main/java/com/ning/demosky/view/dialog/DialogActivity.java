@@ -66,27 +66,27 @@ public class DialogActivity extends AppCompatActivity {
             }
         });
 
-        WheelView wheelViewHour = (WheelView) view.findViewById(R.id.wheel_view_hour);
-        wheelViewHour.setOffset(1);
-        wheelViewHour.setItems(getHourData());
-        wheelViewHour.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
-            @Override
-            public void onSelected(int selectedIndex, String item) {
-                super.onSelected(selectedIndex, item);
-                hour = item;
-            }
-        });
-
-        WheelView wheelViewMinute = (WheelView) view.findViewById(R.id.wheel_view_minute);
-        wheelViewMinute.setOffset(1);
-        wheelViewMinute.setItems(getMinuteData());
-        wheelViewMinute.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
-            @Override
-            public void onSelected(int selectedIndex, String item) {
-                super.onSelected(selectedIndex, item);
-                minute = item;
-            }
-        });
+//        WheelView wheelViewHour = (WheelView) view.findViewById(R.id.wheel_view_hour);
+//        wheelViewHour.setOffset(1);
+//        wheelViewHour.setItems(getHourData());
+//        wheelViewHour.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+//            @Override
+//            public void onSelected(int selectedIndex, String item) {
+//                super.onSelected(selectedIndex, item);
+//                hour = item;
+//            }
+//        });
+//
+//        WheelView wheelViewMinute = (WheelView) view.findViewById(R.id.wheel_view_minute);
+//        wheelViewMinute.setOffset(1);
+//        wheelViewMinute.setItems(getMinuteData());
+//        wheelViewMinute.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+//            @Override
+//            public void onSelected(int selectedIndex, String item) {
+//                super.onSelected(selectedIndex, item);
+//                minute = item;
+//            }
+//        });
 
 
         ImageButton dialogImageButtonTrue = (ImageButton) view.findViewById(R.id.dialog_dashboard_date_accept);

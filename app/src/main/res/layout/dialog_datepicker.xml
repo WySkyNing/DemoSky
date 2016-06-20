@@ -50,19 +50,28 @@
             android:layout_width="10dp"
             android:layout_height="10dp"/>
 
-        <com.ning.demosky.view.dialog.WheelView
-            android:id="@+id/wheel_view_hour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <!--<com.ning.demosky.view.dialog.WheelView-->
+            <!--android:id="@+id/wheel_view_hour"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"/>-->
 
-        <View
-            android:layout_width="10dp"
-            android:layout_height="10dp"/>
+        <!--<View-->
+            <!--android:layout_width="10dp"-->
+            <!--android:layout_height="10dp"/>-->
 
-        <com.ning.demosky.view.dialog.WheelView
-            android:id="@+id/wheel_view_minute"
+        <!--<com.ning.demosky.view.dialog.WheelView-->
+            <!--android:id="@+id/wheel_view_minute"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"/>-->
+
+        <TimePicker
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+
+        </TimePicker>
     </LinearLayout>
+
+
+
     
 </LinearLayout>

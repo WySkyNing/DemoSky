@@ -43,6 +43,7 @@ public class PullView extends LinearLayout implements View.OnTouchListener {
 
     LayoutParams layoutParams;
     ImageView imageView;
+    LinearLayout linearLayout;
 
     private void init(Context context) {
 
@@ -53,15 +54,26 @@ public class PullView extends LinearLayout implements View.OnTouchListener {
         paint.setTextSize(30);
 
         this.setOrientation(VERTICAL);
+        linearLayout = new LinearLayout(context);
+        LayoutParams layoutParams_ = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,400);
+        linearLayout.setLayoutParams(layoutParams_);
+        linearLayout.setBackgroundColor(Color.BLUE);
+        this.addView(linearLayout,0);
+
+
 
         imageView = new ImageView(context);
         LayoutParams layoutParamsImg = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300);
         layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, -1);
         layoutParamsImg.topMargin = -300;
 
+
         imageView.setLayoutParams(layoutParamsImg);
         imageView.setImageResource(R.mipmap.ic_launcher);
-        addView(imageView, 0);
+
+
+
+        addView(imageView, 1);
     }
 
     @Override
@@ -90,7 +102,10 @@ public class PullView extends LinearLayout implements View.OnTouchListener {
                 recfY = recfY + event.getRawY();
                 float distance = (yDown - event.getRawY()) / 2;
 
-                layoutParams.topMargin = -(int) distance;
+                if (distance < 400){
+                    layoutParams.topMargin = -(int) distance;
+                }
+
                 Log.e("distance",distance + "");
 //                imageView.setLayoutParams(layoutParams);
 
@@ -107,9 +122,16 @@ public class PullView extends LinearLayout implements View.OnTouchListener {
 
                 TranslateAnimation translateAnimation = new TranslateAnimation(0,0,event.getRawY() / 2,-300);
                 translateAnimation.setDuration(2000);
-                imageView.startAnimation(translateAnimation);
 
-                layoutParams.topMargin = -300;
+//                linearLayout.startAnimation(translateAnimation);
+//                imageView.startAnimation(translateAnimation);
+//
+//                View view = this.getChildAt(2);
+//                view.startAnimation(translateAnimation);
+
+                this.startAnimation(translateAnimation);
+
+                layoutParams.topMargin = -400;
                 this.setLayoutParams(layoutParams);
         }
 

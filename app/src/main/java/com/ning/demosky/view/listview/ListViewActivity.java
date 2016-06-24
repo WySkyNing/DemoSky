@@ -46,6 +46,8 @@ public class ListViewActivity extends AppCompatActivity{
 
         viewPager.setAdapter(adapter);
 
+        viewPager.getCurrentItem();
+
         String str1 = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).format(new Date());
 
         String str =  SimpleDateFormat.getDateInstance().format(new Date());

@@ -12,9 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-
 import com.ning.demosky.R;
-
 import java.util.ArrayList;
 import java.util.List;
 

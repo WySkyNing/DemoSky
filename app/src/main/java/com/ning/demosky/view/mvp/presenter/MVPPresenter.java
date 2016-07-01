@@ -7,7 +7,8 @@ import com.ning.demosky.view.mvp.view.ViewInter;
 import com.ning.demosky.view.mvp.view.activity.MVPActivity;
 
 /**
- * Created by yorki on 2016/6/14.
+ * Created by wy on 2016/6/14.
+ *
  */
 public class MVPPresenter implements NetworkConnectInter{
 

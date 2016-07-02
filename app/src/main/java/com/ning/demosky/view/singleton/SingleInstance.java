@@ -11,7 +11,7 @@ public class SingleInstance {
 
         SingleInstance _instance = instance;
 
-        if (null == instance){
+        if (null == _instance){
 
             synchronized (SingleInstance.class){
 

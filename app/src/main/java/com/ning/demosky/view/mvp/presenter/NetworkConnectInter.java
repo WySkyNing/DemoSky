@@ -8,7 +8,6 @@ package com.ning.demosky.view.mvp.presenter;
  */
 public interface NetworkConnectInter {
 
-
     /**
      * 开始加载网络数据请求
      * */

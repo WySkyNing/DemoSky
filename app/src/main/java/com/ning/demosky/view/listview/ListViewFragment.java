@@ -6,10 +6,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.ning.demosky.R;
+import com.ning.demosky.view.adapter.Adapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +25,15 @@ import java.util.List;
 public class ListViewFragment extends android.support.v4.app.Fragment {
 
     private ListView listView;
+    private LineGridView gridView;
     private List<DataBean> datas;
     private ListViewAdapter listViewAdapter;
 
     private Context context;
+
+    private Adapter adapter;
+
+
 
     @Nullable
     @Override
@@ -68,7 +77,7 @@ public class ListViewFragment extends android.support.v4.app.Fragment {
                 dataBean.setIs(false);
             }
 
-            dataBean.setData("数据" + i);
+            dataBean.setData("数据____" + i);
             datas.add(dataBean);
 
         }
@@ -77,11 +86,21 @@ public class ListViewFragment extends android.support.v4.app.Fragment {
 
     private void initView(View view) {
         listView = (ListView) view.findViewById(R.id.list_view);
-        listViewAdapter = new ListViewAdapter(context, datas);
-        listView.setAdapter(listViewAdapter);
+//        listViewAdapter = new ListViewAdapter(context, datas);
+//        listView.setAdapter(listViewAdapter);
 
-//        mAdapter = new MAdapter(datas,context);
-//        listView.setAdapter(mAdapter);
+        adapter = new Adapter(context,datas);
+        listView.setAdapter(adapter);
+
+        gridView = (LineGridView) view.findViewById(R.id.grid_view);
+        gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(context, position+"", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

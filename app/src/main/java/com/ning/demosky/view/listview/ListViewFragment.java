@@ -8,19 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+
 import com.ning.demosky.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by yorki on 2016/6/21.
+ * Created by wy on 2016/6/21.
+ *
  */
 public class ListViewFragment extends android.support.v4.app.Fragment {
 
     private ListView listView;
     private List<DataBean> datas;
     private ListViewAdapter listViewAdapter;
+
     private Context context;
 
     @Nullable
@@ -76,6 +79,9 @@ public class ListViewFragment extends android.support.v4.app.Fragment {
         listView = (ListView) view.findViewById(R.id.list_view);
         listViewAdapter = new ListViewAdapter(context, datas);
         listView.setAdapter(listViewAdapter);
+
+//        mAdapter = new MAdapter(datas,context);
+//        listView.setAdapter(mAdapter);
     }
 
 }

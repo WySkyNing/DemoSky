@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.camera.UseCameraActivity">
+        <activity android:name=".view.view.topbtnpulllist.ListViewBtnPullList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -3,14 +3,22 @@ package com.ning.demosky.view.listview;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ning.demosky.R;
+import com.ning.demosky.view.view.topbtnpulllist.DropDownMenu;
+import com.ning.demosky.view.view.topbtnpulllist.GirdDropDownAdapter;
+import com.ning.demosky.view.view.topbtnpulllist.ListDropDownAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,6 +30,7 @@ public class ListViewFragment extends android.support.v4.app.Fragment {
     private List<DataBean> datas;
     private ListViewAdapter listViewAdapter;
     private Context context;
+
 
     @Nullable
     @Override
@@ -73,9 +82,15 @@ public class ListViewFragment extends android.support.v4.app.Fragment {
 
 
     private void initView(View view) {
-        listView = (ListView) view.findViewById(R.id.list_view);
+
+        listView  = (ListView) view.findViewById(R.id.list_view);
         listViewAdapter = new ListViewAdapter(context, datas);
         listView.setAdapter(listViewAdapter);
+
+
     }
+
+
+
 
 }

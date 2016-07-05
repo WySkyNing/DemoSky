@@ -5,15 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.ning.demosky.R;
+import com.ning.demosky.view.listview.DataBean;
+
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/6/30.
  *
  */
-public class Adapter extends CommonAdapter<String>{
+public class Adapter extends CommonAdapter<DataBean>{
 
-    public Adapter(Context context, List<String> listData){
+    public Adapter(Context context, List<DataBean> listData){
         super(context,listData);
     }
 
@@ -25,7 +27,7 @@ public class Adapter extends CommonAdapter<String>{
 
         TextView textView = viewHolder.getView(R.id.list_view_item_text_view);
 
-        textView.setTag(listData.get(position));
+        textView.setText(listData.get(position).getData());
 
         return viewHolder.getmConvertView();
     }

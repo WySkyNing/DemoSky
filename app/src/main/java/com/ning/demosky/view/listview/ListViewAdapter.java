@@ -27,6 +27,7 @@ public class ListViewAdapter extends BaseAdapter {
         this.context = context;
         this.datas = datas;
         layoutInflater = LayoutInflater.from(context);
+
     }
 
     @Override

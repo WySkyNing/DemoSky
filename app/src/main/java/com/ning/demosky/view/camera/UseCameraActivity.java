@@ -15,6 +15,7 @@ import java.io.IOException;
 
 /**
  * 照片生成的目录在 sd卡的/a/image/camera/.. .jpg
+ *
  * 
  * @author baozi
  * 
@@ -60,6 +61,7 @@ public class UseCameraActivity extends Activity {
 
 	public void initialUI() {
 		//根据时间生成 后缀为  .jpg 的图片
+
 		long ts = System.currentTimeMillis();
 		mImageFilePath = getCameraPath() + ts + ".jpg";
 		File out = new File(mImageFilePath);
@@ -154,20 +156,4 @@ public class UseCameraActivity extends Activity {
 	}
 
 }
-//┏┓　　　┏┓
-//┏┛┻━━━┛┻┓
-//┃　　　　　　　┃ 　
-//┃　　　━　　　┃
-//┃　┳┛　┗┳　┃
-//┃　　　　　　　┃
-//┃　　　┻　　　┃
-//┃　　　　　　　┃
-//┗━┓　　　┏━┛
-//    ┃　　　┃   神兽保佑　　　　　　　　
-//    ┃　　　┃   代码无BUG！
-//    ┃　　　┗━━━┓
-//    ┃　　　　　　　┣┓
-//    ┃　　　　　　　┏┛
-//    ┗┓┓┏━┳┓┏┛
-//      ┃┫┫　┃┫┫
-//      ┗┻┛　┗┻┛
+

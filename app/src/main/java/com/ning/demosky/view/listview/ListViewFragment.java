@@ -7,14 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.Toast;
-
-
 import com.ning.demosky.R;
+import android.widget.Toast;
 import com.ning.demosky.view.adapter.Adapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +26,6 @@ public class ListViewFragment extends android.support.v4.app.Fragment {
     private ListViewAdapter listViewAdapter;
 
     private Context context;
-
     private Adapter adapter;
 
 
@@ -84,22 +79,28 @@ public class ListViewFragment extends android.support.v4.app.Fragment {
 
 
     private void initView(View view) {
+
+
         listView = (ListView) view.findViewById(R.id.list_view);
-//        listViewAdapter = new ListViewAdapter(context, datas);
-//        listView.setAdapter(listViewAdapter);
+        listViewAdapter = new ListViewAdapter(context, datas);
+        listView.setAdapter(listViewAdapter);
 
         adapter = new Adapter(context,datas);
         listView.setAdapter(adapter);
 
-        gridView = (LineGridView) view.findViewById(R.id.grid_view);
-        gridView.setAdapter(adapter);
+//        gridView = (LineGridView) view.findViewById(R.id.grid_view);
+//        gridView.setAdapter(adapter);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context, position+"", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(context, position+"", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
     }
+
+
+
 
 }

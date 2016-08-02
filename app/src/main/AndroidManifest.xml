@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".view.view.topbtnpulllist.ListViewBtnPullList">
+        <activity android:name=".view.recycler.RecyclerActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

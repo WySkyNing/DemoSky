@@ -6,7 +6,7 @@ import android.content.Context;
 /**
  * Created by yorki on 2016/6/14.
  */
-public class MyApplication extends Application{
+public class MyApplication extends Application {
 
     public static Context appContext;
 
@@ -15,5 +15,7 @@ public class MyApplication extends Application{
         super.onCreate();
 
         appContext = this;
+
+        MyCrashHandler.getInstance().init(getApplicationContext());
     }
 }

@@ -35,7 +35,7 @@
 
         </meta-data>
 
-        <activity android:name=".view.base.CrashTextActivity">
+        <activity android:name=".view.db.DdActivity">
 
 
             <intent-filter>
@@ -45,6 +45,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.view.ViewActivity"/>
 
         <service android:name="com.amap.api.location.APSService"/>
     </application>

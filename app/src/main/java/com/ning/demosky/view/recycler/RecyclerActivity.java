@@ -16,7 +16,7 @@ import java.util.List;
 public class RecyclerActivity extends AppCompatActivity {
 
     private List<String> datas;
-
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +24,11 @@ public class RecyclerActivity extends AppCompatActivity {
 
         initData();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         /**设置布局管理器  瀑布流在适配器中设置Item高度随机*/
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 
         /* 瀑布流效果 */

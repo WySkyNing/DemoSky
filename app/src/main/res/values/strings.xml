@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DemoSky</string>
+    <string name="db_create">创建</string>
+    <string name="db_add">添加</string>
+    <string name="db_delete">删除</string>
+    <string name="db_up">更新</string>
+    <string name="db_query">查询</string>
 </resources>

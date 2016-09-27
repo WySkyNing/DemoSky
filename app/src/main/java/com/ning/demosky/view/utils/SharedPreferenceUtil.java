@@ -19,19 +19,15 @@ public class SharedPreferenceUtil {
 					.getDefaultSharedPreferences(context);
 		}
 	}
-
 	/**
 	 * 添加Int类型
-	 * 
-	 * @param context
-	 * @param key
-	 * @param value
+	 *
 	 */
-	public static void setSharedIntData(Context context, String key, int value) {
+	public static boolean setSharedIntData(Context context, String key, int value) {
 		if (mSharedPreferences == null) {
 			init(context);
 		}
-		mSharedPreferences.edit().putInt(key, value).commit();
+		return mSharedPreferences.edit().putInt(key, value).commit();
 	}
 
 	/**

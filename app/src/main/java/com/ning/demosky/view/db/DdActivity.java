@@ -111,18 +111,19 @@ public class DdActivity extends AppCompatActivity {
 
                 SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
 
-                Cursor cursor = db.query("book", null, null, null, null, null, null);
-
+              //Cursor cursor = db.query("book", null, null, null, null, null, null);
+                Cursor cursor = db.query("book",new String[]{"name","pages"},"author = ?",new String[]{"wy"},null,null,null);
+                Log.e("wwwwwwwwwww", "book name ");
                 if (cursor.moveToFirst()) {
 
                     do {
                         String name = cursor.getString(cursor.getColumnIndex("name"));
-                        String author = cursor.getString(cursor.getColumnIndex("author"));
+                        //String author = cursor.getString(cursor.getColumnIndex("author"));
                         int pages = cursor.getInt(cursor.getColumnIndex("pages"));
                         //double price = cursor.getDouble(cursor.getColumnIndex("price"));
 
                         Log.e("MainActivity", "book name is " + name);
-                        Log.e("MainActivity", "book author is " + author);
+                       // Log.e("MainActivity", "book author is " + author);
                         Log.e("MainActivity", "book pages is " + pages);
                        // Log.e("MainActivity", "book price is " + price);
 

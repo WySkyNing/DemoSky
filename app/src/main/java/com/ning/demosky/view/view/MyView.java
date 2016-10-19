@@ -36,6 +36,7 @@ public class MyView extends BaseView{
         lineNum = typedArray.getInt(R.styleable.MyView_line, 1);
         /**解析完成后释放 typedArray*/
         typedArray.recycle();
+
     }
 
     public MyView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -74,5 +75,8 @@ public class MyView extends BaseView{
             sweepAngle = 0;
         }
 
+
     }
+
+
 }

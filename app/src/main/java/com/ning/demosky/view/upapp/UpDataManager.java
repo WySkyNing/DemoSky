@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -13,16 +13,15 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.ning.demosky.R;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,42 +34,35 @@ import java.net.URL;
  */
 public class UpDataManager {
 
+    private File akpFile;
+
     public static final String PATH = "http://api.ocarlife.cn/car/versionType/android_store_version.xml";
     private static final int DOWNLOADING = 1;//正在下载
     private static final int DOWNLOAD_FINISH = 2;//下载完成
 
     private boolean mIsCancel = false;//是否取消下载
 
-    private  String mVersion_code;
-    private  String mVersion_name;
-    private  String mVersion_desc;
-    private  String mVersion_path;
+    private  String mVersion_code = "";
+    private  String mVersion_name = "";
+    private  String mVersion_desc = "";
+    private  String mVersion_path = "";
 
     private Context mContext;
 
     private ProgressBar mProgressBar;
     private LayoutInflater layoutInflater;
 
-    private AlertDialog mdowlodDialog;//设置全局Dialog
+    private AlertDialog mDownloadDialog;//设置全局Dialog 下载
 
     private String mAPKSavePath;
 
-    private int mProgess;//当前进度条位置
+    private int mProgress;//当前进度条位置
 
     public UpDataManager(Context context) {
         mContext = context;
         layoutInflater = LayoutInflater.from(mContext);
     }
 
-    private Handler responseHandler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-
-
-
-            return false;
-        }
-    });
 
     /**获取服务器的版本信息*/
     private void getServiceAppInfo(){
@@ -92,24 +84,6 @@ public class UpDataManager {
                     InputStream is = connection.getInputStream();
 
                     parseXMLWithPull(is);
-//
-//                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-//
-//                    StringBuilder builder = new StringBuilder();
-//
-//                    String line;
-//
-//                    while ((line = bufferedReader.readLine()) != null){
-//                        builder.append(line);
-//                    }
-//
-//                    Log.e("builder.toString()",builder.toString());
-////
-//                    Message message = new Message();
-//
-//                    message.obj = is;
-//
-//                    responseHandler.sendMessage(message);
 
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -137,7 +111,6 @@ public class UpDataManager {
             XmlPullParser xmlPullParser = factory.newPullParser();
 
             xmlPullParser.setInput(response,"UTF-8");
-            Log.e("response", "--parseXMLWithPull");
 
             /**获取当前解析事件*/
             int eventType = xmlPullParser.getEventType();
@@ -152,8 +125,6 @@ public class UpDataManager {
 
                     /**开始解析某个节点*/
                     case XmlPullParser.START_TAG:
-
-
 
                         if ("version_code".equals(nodeName)){
 
@@ -174,23 +145,8 @@ public class UpDataManager {
                     case XmlPullParser.END_TAG:
 
                         if ("root".equals(nodeName)){
-
-                            Log.e("response", mVersion_code + mVersion_name + mVersion_path);
-
-                            get(mVersion_code);
-
-                            Message message = new Message();
-
-                            Bundle bundle = new Bundle();
-
-                            bundle.putString("mVersion_code",mVersion_code);
-                            bundle.putString("mVersion_name",mVersion_name);
-                            bundle.putString("mVersion_path",mVersion_path);
-
-                            message.setData(bundle);
-
-                            message.what = 3;
-                            mUpDataDownlodProgessHandler.sendMessage(message);
+                            //解析完成
+                            mUpDataDownlodProgessHandler.sendEmptyMessage(3);
                         }
                         break;
 
@@ -201,18 +157,9 @@ public class UpDataManager {
                 eventType = xmlPullParser.next();
             }
 
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (XmlPullParserException | IOException e) {
             e.printStackTrace();
         }
-    }
-
-
-    private void get(String code){
-        Log.e("---------------",code);
-
-        mVersion_code = code;
     }
 
     /**
@@ -222,43 +169,28 @@ public class UpDataManager {
 
         getServiceAppInfo();
 
-        if (isUpData()) {
-            //Toast.makeText(mContext, "需要更新", Toast.LENGTH_SHORT).show();
-            showNoticeDialog();
-        } else {
-            Toast.makeText(mContext, "不需要更新", Toast.LENGTH_SHORT).show();
-        }
-
     }
 
 
     /**
      * 与本地版本比较是否需要更新
      */
-    public boolean isUpData() {
+    private boolean isUpData() {
 
-        if (!"".equals(mVersion_code)) {
-            Log.e("mVersion_code", "-" + mVersion_code);
-            int serviceVersinCode = Integer.valueOf(mVersion_code).intValue();
-            int localVersinCode = 1;
+        if (!"".equals(mVersion_code) && null != mVersion_code) {
+
+            int serviceVersionCode = Integer.valueOf(mVersion_code);
+            int localVersionCode = 1000;
 
             try {
-                localVersinCode = mContext.getPackageManager()
-                        .getPackageInfo("com.ning.upapp", 0)
+                localVersionCode = mContext.getPackageManager()
+                        .getPackageInfo("com.ning.demosky", 0)
                         .versionCode;
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
 
-            if (serviceVersinCode > localVersinCode) {
-
-                return true;
-
-            } else {
-
-                return false;
-            }
-
+            return serviceVersionCode > localVersionCode;
 
         }
         return false;
@@ -268,25 +200,24 @@ public class UpDataManager {
     /**
      * 有更新时显示提示对话框
      */
-    public void showNoticeDialog() {
+    private void showNoticeDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("提示");
         String message = "有新的版本,是否需要更新?" + mVersion_desc;
         builder.setMessage(message);
 
-        builder.setNegativeButton("更新", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //隐藏对话框
                 dialog.dismiss();
                 //显示下载对话框
-                showDowloadDialog();
-
+                showDownloadDialog();
             }
         });
 
-        builder.setPositiveButton("下载再说", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //隐藏对话框
@@ -302,16 +233,20 @@ public class UpDataManager {
     /**
      * 显示下载的对话框
      */
-    public void showDowloadDialog() {
+    private void showDownloadDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("下载中");
 
         View view = layoutInflater.inflate(R.layout.dialog_progress,null);
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.animation_activity_image_view);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
+        AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getBackground();
+
         builder.setView(view);
 
-        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -322,9 +257,10 @@ public class UpDataManager {
             }
         });
 
-        mdowlodDialog = builder.create();
-        mdowlodDialog.show();
+        mDownloadDialog = builder.create();
+        mDownloadDialog.show();
 
+        animationDrawable.start();
         dowloadAPK();
     }
 
@@ -337,12 +273,12 @@ public class UpDataManager {
 
                 case DOWNLOADING:
                     /**正在下载.设置进度条*/
-                    mProgressBar.setProgress(mProgess);
+                    mProgressBar.setProgress(mProgress);
                     break;
 
                 case DOWNLOAD_FINISH:
                     /**下载完成,隐藏Dialog*/
-                    mdowlodDialog.dismiss();
+                    mDownloadDialog.dismiss();
 
                     /**安装*/
                     installAPK();
@@ -350,11 +286,12 @@ public class UpDataManager {
 
                 case 3:
 
-                    Bundle bundle = msg.getData();
-
-                    Log.e("bundle.getString",bundle.getString("mVersion_code")+"---");
-
-                    mVersion_code =  bundle.getString("mVersion_code");
+                    if (isUpData()) {
+                        //Toast.makeText(mContext, "需要更新", Toast.LENGTH_SHORT).show();
+                        showNoticeDialog();
+                    } else {
+                        Toast.makeText(mContext, "不需要更新", Toast.LENGTH_SHORT).show();
+                    }
 
                     break;
             }
@@ -376,15 +313,10 @@ public class UpDataManager {
                         .equals(Environment.MEDIA_MOUNTED)){
 
                     /**获取SD卡路径*/
-                    String sdPath = Environment.getDownloadCacheDirectory() + "/";
+                    String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
 
                     /**apk文件路径*/
                     mAPKSavePath = sdPath + "apk";
-                    File dir = new File(mAPKSavePath);
-                    if (!dir.exists()){
-                        dir.mkdir();
-                    }
-
 
                     /**下载文件*/
                     try {
@@ -402,7 +334,8 @@ public class UpDataManager {
                         int length = connection.getContentLength();
 
                         /** 创建文件*/
-                        File akpFile = new File(mAPKSavePath,mVersion_name);
+
+                        akpFile = new File(sdPath,"app_name"+mVersion_name+ ".apk");
 
                         /**写流*/
                         FileOutputStream fos = new FileOutputStream(akpFile);
@@ -412,14 +345,17 @@ public class UpDataManager {
 
                         byte[] buffer = new byte[1024];
 
+
+
                         while (!mIsCancel){
+
                             /**本次读取的字节数*/
                             int numRead = inputStream.read(buffer);
                             /**下载的总量*/
                             count += numRead;
 
                             /**计算当前进度条的位置*/
-                            mProgess = (int) ((float)count/length * 100);
+                            mProgress = (int) ((float)count/length * 100);
 
                             /**更新进度条*/
                             mUpDataDownlodProgessHandler.sendEmptyMessage(DOWNLOADING);
@@ -438,6 +374,8 @@ public class UpDataManager {
                         inputStream.close();
 
 
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
@@ -452,9 +390,9 @@ public class UpDataManager {
     /**
      * 下载到本地执行安装
      */
-    public void installAPK() {
+    private void installAPK() {
 
-        File apkFile = new File(mAPKSavePath,mVersion_name);
+        File apkFile = akpFile;
 
         if (!apkFile.exists()){
             return;
@@ -468,9 +406,76 @@ public class UpDataManager {
 
         mContext.startActivity(intent);
 
-
-
     }
+
+
+
+
+
+
+    public static final String TAG = UpDataManager.class.getSimpleName();
+    /**
+     * 创建文件根目录
+     *
+     * @param context
+     * @param path
+     * @return
+     */
+    public static File createDirFile(Context context, String path) {
+        if (null == path) {
+            return null;
+        }
+        File dirFile = null;
+        if (!isSDCardExist()) {
+            Log.e(TAG, "SDCard Unavailable");
+            return null;
+        }
+        if (!isHasSDCardPermission(context)) {
+            Log.e(TAG,
+                    "No android.permission.WRITE_EXTERNAL_STORAGE Permission");
+            return null;
+        }
+        if (null == path) {
+            Log.e(TAG, "FilePath is null");
+            return null;
+        }
+        dirFile = new File(path);
+        if (!dirFile.exists()) {
+            dirFile.mkdirs();
+        }
+        return dirFile;
+    }
+
+    /**
+     * 获取当前SD卡是否可用
+     *
+     * @return
+     */
+    public static boolean isSDCardExist() {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * SD卡操作权限
+     */
+    private static final String EXTERNAL_STORAGE_PERMISSION = "android.permission.WRITE_EXTERNAL_STORAGE";
+    /**
+     * 判断是否有读取SD权限
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isHasSDCardPermission(Context context) {
+        int permission = context
+                .checkCallingOrSelfPermission(EXTERNAL_STORAGE_PERMISSION);
+        return permission == PackageManager.PERMISSION_GRANTED;
+    }
+
 
 
 }

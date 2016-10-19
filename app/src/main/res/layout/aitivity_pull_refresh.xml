@@ -4,9 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
     <com.ning.demosky.view.pullrefresh.PullView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"/>
     </com.ning.demosky.view.pullrefresh.PullView>
 </LinearLayout>

@@ -16,6 +16,7 @@ import com.ning.demosky.R;
 /**
  * Created by wy on 2016/10/17.
  *
+ * paint.setXfermode 设置叠加模式
  */
 public class CustomView3 extends View {
 
@@ -113,7 +114,6 @@ public class CustomView3 extends View {
         mPaintSecond.setAntiAlias(true); // 消除锯齿
         mPaintSecond.setStyle(Paint.Style.STROKE); // 设置空心
 
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -159,7 +159,7 @@ public class CustomView3 extends View {
 
 
         if (oval == null)
-            /** 内部四个方向相切 */
+
             oval = new RectF(centre - radius, centre - radius, centre + radius, centre + radius); // 用于定义的圆弧的形状和大小的界限
         if (!isNext) {// 第一颜色的圈完整，第二颜色跑
 //            mPaint.setColor(mFirstColor); // 设置圆环的颜色
@@ -176,6 +176,11 @@ public class CustomView3 extends View {
 //            canvas.drawArc(oval, -90, mProgress, false, mPaint); // 根据进度画圆弧
         }
         canvas.drawRect(oval,mPaintFirst);
+        /**
+         * 参数 1  弧的外切矩形 确定弧的位置
+         * 参数 2  弧的起始角度
+         * 参数 3  确定弧长的角度 ，弧的长度
+         * */
         canvas.drawArc(oval, 0, mProgress, false, mPaintFirst);
         canvas.drawArc(oval, mProgress , 360 - mProgress, false, mPaintSecond);
     }

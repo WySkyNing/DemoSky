@@ -50,11 +50,17 @@
         <attr name="second_color" format="color"/>
         <attr name="circle_width" format="dimension"/>
         <attr name="speed" format="integer"/>
-
     </declare-styleable>
 
     <!-- view4  -->
     <declare-styleable name="CustomView4">
 
+        <attr name="c4_first_color" format="color"/>
+        <attr name="c4_second_color" format="color"/>
+        <attr name="c4_circle_width" format="dimension"/>
+        <attr name="c4_dot_count" format="integer"/>
+        <attr name="c4_split_size" format="integer"/>
+        <attr name="c4_image" format="reference"/>
+        
     </declare-styleable>
 </resources>

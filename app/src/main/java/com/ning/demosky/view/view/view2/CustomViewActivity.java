@@ -50,5 +50,15 @@ public class CustomViewActivity extends BaseActivity{
             }
         });
 
+        Button custom_btn_4 = (Button) findViewById(R.id.custom_btn_4);
+        custom_btn_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(CustomViewActivity.this,CustomActivity4.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

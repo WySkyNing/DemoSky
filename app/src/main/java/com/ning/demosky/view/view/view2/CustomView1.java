@@ -127,6 +127,12 @@ public class CustomView1 extends View {
      * WRAP_CONTENT，意味着这个视图需要足够装下内容的尺寸（加上padding）
      * <p>
      * UNSPECIFIED：父元素不对子元素施加任何束缚，子元素可以得到任意想要的大小
+     *
+     *
+     * 系统帮我们测量的高度和宽度都是MATCH_PARENT，当我们设置明确的宽度和高度时，
+     * 系统帮我们测量的结果就是我们设置的结果，
+     * 当我们设置为WRAP_CONTENT,或者MATCH_PARENT系统帮我们测量的结果就是MATCH_PARENT的长度。
+     * 所以，当设置了WRAP_CONTENT时，我们需要自己进行测量，即重写 nMeasure 方法”：
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

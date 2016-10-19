@@ -63,8 +63,8 @@ public abstract class BaseView extends View {
      */
     @Override
     protected void onDetachedFromWindow() {
-        running = false;
         super.onDetachedFromWindow();
+        running = false;
     }
 
     private class MyThread extends Thread {

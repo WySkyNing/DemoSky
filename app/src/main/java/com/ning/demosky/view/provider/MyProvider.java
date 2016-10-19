@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.ning.demosky.view.base.MyApplication;
 import com.ning.demosky.view.db.MyDataBaseHelper;
@@ -18,22 +19,23 @@ import com.ning.demosky.view.db.MyDataBaseHelper;
  */
 public class MyProvider extends ContentProvider {
 
-    public static final int TABLE1_DIR = 0;
-    public static final int TABLE1_ITEM = 1;
-    public static final int TABLE2_DIR = 2;
-    public static final int TABLE2_ITEM = 3;
+    public static final int BOOK_DIR = 0;
+    public static final int BOOK_ITEM = 1;
+    public static final int USER_DIR = 2;
+    public static final int USER_ITEM = 3;
     private static UriMatcher uriMatcher;
 
-    public static final String AUTHORITY = "com.ning.demosky";
+    public static final String AUTHORITY = "com.ning.demosky.provider";
+
     private MyDataBaseHelper dbHelper;
 
 
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        uriMatcher.addURI("com.ning.demosky", "table1", TABLE1_DIR);
-        uriMatcher.addURI("com.ning.demosky ", "table1/#", TABLE1_ITEM);
-        uriMatcher.addURI("com.ning.demosky ", "table2", TABLE2_DIR);
-        uriMatcher.addURI("com.ning.demosky ", "table2/#", TABLE2_ITEM);
+        uriMatcher.addURI(AUTHORITY, "book", BOOK_DIR);
+        uriMatcher.addURI(AUTHORITY, "book/#", BOOK_ITEM);
+        uriMatcher.addURI(AUTHORITY, "user", USER_DIR);
+        uriMatcher.addURI(AUTHORITY, "user/#", USER_ITEM);
     }
 
 
@@ -44,7 +46,7 @@ public class MyProvider extends ContentProvider {
      */
     @Override
     public boolean onCreate() {
-        dbHelper = new MyDataBaseHelper(MyApplication.appContext,"BookStore.db",null,2);
+        dbHelper = new MyDataBaseHelper(getContext(),"BookStore.db",null,2);
         return true;
     }
 
@@ -55,6 +57,20 @@ public class MyProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        switch (uriMatcher.match(uri)){
+
+            case BOOK_DIR:
+
+                db.insert("book",null,values);
+                break;
+
+        }
+
+
+
+
         return null;
     }
 
@@ -84,23 +100,31 @@ public class MyProvider extends ContentProvider {
      */
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
 
         Cursor cursor = null;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         switch (uriMatcher.match(uri)) {
-            case TABLE1_DIR:
-            // 查询table1表中的所有数据
+            case BOOK_DIR:
+            // 查询book表中的所有数据
+                cursor = db.query("book",projection,selection,selectionArgs,null,null,sortOrder);
+
                 break;
-            case TABLE1_ITEM:
-            // 查询table1表中的单条数据
+            case BOOK_ITEM:
+            // 查询book表中的单条数据
+                String bookId = uri.getPathSegments().get(1);
+                cursor = db.query("book",projection,"id = ?",new String[]{bookId},null,null,sortOrder);
                 break;
-            case TABLE2_DIR:
+            case USER_DIR:
             // 查询table2表中的所有数据
+                cursor = db.query("user",projection,selection,selectionArgs,null,null,sortOrder);
                 break;
-            case TABLE2_ITEM:
+            case USER_ITEM:
             // 查询table2表中的单条数据
+                String userId = uri.getPathSegments().get(1);
+                cursor = db.query("user",projection,"id = ?",new String[]{userId},null,null,sortOrder);
                 break;
             default:
                 break;
@@ -117,14 +141,14 @@ public class MyProvider extends ContentProvider {
     public String getType(@NonNull Uri uri) {
 
         switch (uriMatcher.match(uri)) {
-            case TABLE1_DIR:
-                return "vnd.android.cursor.dir/vnd.com.example.app.provider. table1";
-            case TABLE1_ITEM:
-                return "vnd.android.cursor.item/vnd.com.example.app.provider. table1";
-            case TABLE2_DIR:
-                return "vnd.android.cursor.dir/vnd.com.example.app.provider. table2";
-            case TABLE2_ITEM:
-                return "vnd.android.cursor.item/vnd.com.example.app.provider. table2";
+            case BOOK_DIR:
+                return "vnd.android.cursor.dir/vnd.com.example.app.provider.table1";
+            case BOOK_ITEM:
+                return "vnd.android.cursor.item/vnd.com.example.app.provider.table1";
+            case USER_DIR:
+                return "vnd.android.cursor.dir/vnd.com.example.app.provider.table2";
+            case USER_ITEM:
+                return "vnd.android.cursor.item/vnd.com.example.app.provider.table2";
             default:
                 return null;
 

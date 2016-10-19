@@ -28,8 +28,8 @@ public class NetWorkUtils {
     /**
      * Get network type
      * 
-     * @param context
-     * @return
+     * @param context c
+     * @return i
      */
     public static int getNetworkType(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)context
@@ -41,8 +41,8 @@ public class NetWorkUtils {
     /**
      * Get network type name
      * 
-     * @param context
-     * @return
+     * @param context c
+     * @return s
      */
     public static String getNetworkTypeName(Context context) {
         ConnectivityManager manager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -50,7 +50,7 @@ public class NetWorkUtils {
         String type = NETWORK_TYPE_DISCONNECT;
         if (manager == null || (networkInfo = manager.getActiveNetworkInfo()) == null) {
             return type;
-        };
+        }
 
         if (networkInfo.isConnected()) {
             String typeName = networkInfo.getTypeName();

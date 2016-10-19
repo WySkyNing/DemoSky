@@ -12,6 +12,7 @@ import android.view.View;
 
 /**
  * Created by yorki on 2016/5/23.
+ *
  */
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration{
 

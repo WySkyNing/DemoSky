@@ -16,7 +16,7 @@ import com.ning.demosky.R;
  * Created by wy on 2016/9/21.
  *
  */
-public class DdActivity extends AppCompatActivity {
+public class DbActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,10 +50,10 @@ public class DdActivity extends AppCompatActivity {
                 SQLiteDatabase sqLiteDatabase = dataBaseHelper.getWritableDatabase();
                 ContentValues values = new ContentValues();
                 // 开始组装第一条数据
-                values.put("name", "MyBook");
-                values.put("author", "wy");
+                values.put("name", "第一行代码");
+                values.put("author", "郭林");
                 values.put("pages", 100);
-                //values.put("price", 30.96);
+                values.put("price", 30.96);
 
                 /**
                  * 参数1：表名
@@ -63,6 +63,14 @@ public class DdActivity extends AppCompatActivity {
                  * 参数3：没啥说的，以键值对存数据的一个对象
                  * */
                 sqLiteDatabase.insert("book", null, values);
+
+
+                /** 向 user 表中插入数据 */
+                ContentValues _values = new ContentValues();
+                _values.put("name","wy");
+                _values.put("age",16);
+
+                sqLiteDatabase.insert("user",null,_values);
             }
         });
 
@@ -111,24 +119,38 @@ public class DdActivity extends AppCompatActivity {
 
                 SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
 
-              //Cursor cursor = db.query("book", null, null, null, null, null, null);
-                Cursor cursor = db.query("book",new String[]{"name","pages"},"author = ?",new String[]{"wy"},null,null,null);
-                Log.e("wwwwwwwwwww", "book name ");
+                Cursor cursor = db.query("book", null, null, null, null, null, null);
+               // Cursor cursor = db.query("book",new String[]{"name","pages"},"author = ?",new String[]{"wy"},null,null,null);
+
                 if (cursor.moveToFirst()) {
 
                     do {
                         String name = cursor.getString(cursor.getColumnIndex("name"));
-                        //String author = cursor.getString(cursor.getColumnIndex("author"));
+                        String author = cursor.getString(cursor.getColumnIndex("author"));
                         int pages = cursor.getInt(cursor.getColumnIndex("pages"));
-                        //double price = cursor.getDouble(cursor.getColumnIndex("price"));
+                        double price = cursor.getDouble(cursor.getColumnIndex("price"));
 
                         Log.e("MainActivity", "book name is " + name);
-                       // Log.e("MainActivity", "book author is " + author);
+                        Log.e("MainActivity", "book author is " + author);
                         Log.e("MainActivity", "book pages is " + pages);
-                       // Log.e("MainActivity", "book price is " + price);
+                        Log.e("MainActivity", "book price is " + price);
 
                     } while (cursor.moveToNext());
                     cursor.close();
+                }
+
+                Cursor _cursor = db.query("user", null, null, null, null, null, null);
+                if (_cursor.moveToFirst()){
+
+                    while (_cursor.moveToNext()){
+
+                        String userName = _cursor.getString(_cursor.getColumnIndex("name"));
+                        String userAge  = _cursor.getString(_cursor.getColumnIndex("age"));
+
+                        Log.e("MainActivity","user name " + userName);
+                        Log.e("MainActivity","user age " + userAge);
+                    }
+                    _cursor.close();
                 }
             }
         });

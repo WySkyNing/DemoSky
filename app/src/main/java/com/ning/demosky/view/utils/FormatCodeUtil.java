@@ -10,8 +10,8 @@ public class FormatCodeUtil {
     public static String codingFormat(String str) {
 
         try {
-            String utfStr = URLEncoder.encode(str, "utf-8");
-            return utfStr;
+            return URLEncoder.encode(str, "utf-8");
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

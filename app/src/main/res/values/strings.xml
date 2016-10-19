@@ -5,4 +5,12 @@
     <string name="db_delete">删除</string>
     <string name="db_up">更新</string>
     <string name="db_query">查询</string>
+    <string name="main_btn_1_text">数据库</string>
+    <string name="main_btn_2_text">内容提供者</string>
+    <string name="main_btn_3_text">自定义图库</string>
+    <string name="main_btn_4_text">自定义view</string>
+    <string name="custom_view_1">CustomView_1</string>
+    <string name="custom_view_2">CustomView_2</string>
+    <string name="custom_view_3">CustomView_3</string>
+
 </resources>

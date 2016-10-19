@@ -27,10 +27,10 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
             + "pages integer, "
             + "name text)";
 
-    public  final String CREATE_CATEGORY = "create table Category ("
+    public  final String CREATE_CATEGORY = "create table user ("
             + "id integer primary key autoincrement, "
-            + "category_name text, "
-            + "category_code integer)";
+            + "name text, "
+            + "age integer)";
 
     private Context context;
 

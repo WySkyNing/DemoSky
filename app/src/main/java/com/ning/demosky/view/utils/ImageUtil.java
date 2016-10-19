@@ -216,11 +216,11 @@ public class ImageUtil {
 	/**
 	 * 根据长度宽度缩放图片
 	 * 
-	 * @param context
-	 * @param path
-	 * @param w
-	 * @param h
-	 * @return
+	 * @param context c
+	 * @param path p
+	 * @param w w
+	 * @param h h
+	 * @return b
 	 */
 	public static Bitmap createBitmap(Context context, String path, int w, int h) {
 		if (FileUtil.isSDCardExist() && FileUtil.isHasSDCardPermission(context)
@@ -269,7 +269,6 @@ public class ImageUtil {
 	 * 根据屏幕大小以及缩放比例压缩图片
 	 * 
 	 * @param screenWidth
-	 * @param filePath
 	 * @param ratio
 	 * @return
 	 */

@@ -25,13 +25,13 @@ public class StreamUtil {
             InputStreamReader reader = new InputStreamReader(is);
             char[] data = new char[1024];
             int temp = 0;
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             while ((temp = reader.read(data)) != -1) {
                 String str = String.valueOf(data, 0, temp);
                 buffer.append(str);
             }
             is.close();
-            if (reader != null) reader.close();
+            reader.close();
             return buffer.toString();
         } else return null;
     }
@@ -51,8 +51,7 @@ public class StreamUtil {
         }
         CloseHelper.close(fos);
         CloseHelper.close(is);
-        Bitmap bmp = BitmapFactory.decodeFile(file.getAbsolutePath());
-        return bmp;
+        return BitmapFactory.decodeFile(file.getAbsolutePath());
     }
 
     public static void bmpToStream(Bitmap bmp, OutputStream os) {

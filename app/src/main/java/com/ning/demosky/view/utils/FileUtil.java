@@ -49,11 +49,8 @@ public class FileUtil {
 	 * @return
 	 */
 	public static boolean isSDCardExist() {
-		if (Environment.getExternalStorageState().equals(
-				Environment.MEDIA_MOUNTED)) {
-			return true;
-		}
-		return false;
+		return Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED);
 	}
 
 	/**
@@ -287,7 +284,6 @@ public class FileUtil {
 	 * 读取文件
 	 * 
 	 * @param context
-	 * @param filePath
 	 * @param charsetName
 	 * @return
 	 */
@@ -333,8 +329,7 @@ public class FileUtil {
 
 	/**
 	 * 根据字符串写文件
-	 * 
-	 * @param filePath
+	 *
 	 * @param content
 	 * @param append
 	 * @return

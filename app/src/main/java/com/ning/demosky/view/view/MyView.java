@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.os.Handler;
 import android.util.AttributeSet;
 
 import com.ning.demosky.R;
@@ -37,6 +36,7 @@ public class MyView extends BaseView{
         lineNum = typedArray.getInt(R.styleable.MyView_line, 1);
         /**解析完成后释放 typedArray*/
         typedArray.recycle();
+
     }
 
     public MyView(Context context, AttributeSet attrs, int defStyleAttr) {

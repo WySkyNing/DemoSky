@@ -18,8 +18,6 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
 
-
-
     <application
         android:name=".view.base.MyApplication"
         android:allowBackup="true"
@@ -29,14 +27,13 @@
         android:theme="@style/AppTheme">
 
 
-
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="652868d12c3310b9766ff76c183d079d">
 
         </meta-data>
 
-        <activity android:name=".view.provider.ProviderActivity">
+        <activity android:name=".view.base.MainActivity">
 
 
             <intent-filter>
@@ -46,9 +43,28 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.view.ViewActivity"/>
+        <activity android:name=".view.view.ViewActivity" />
+        <activity android:name=".view.db.DbActivity" />
+        <activity android:name=".view.provider.ProviderActivity" />
+        <activity android:name=".view.photo.SelectPhotoActivity" />
+        <activity android:name=".view.photo.PhotoActivity" />
+        <activity android:name=".view.view.view2.CustomViewActivity"/>
 
-        <service android:name="com.amap.api.location.APSService"/>
+        <activity android:name=".view.photo.apps.activity.AlbumItemActivity"/>
+        <activity android:name=".view.photo.apps.activity.AlbumsActivity"/>
+        <activity android:name=".view.photo.apps.activity.SelectedImagesActivity"/>
+
+        <activity android:name=".view.view.view2.CustomActivity1"/>
+        <activity android:name=".view.view.view2.CustomActivity2"/>
+        <activity android:name=".view.view.view2.CustomActivity3"/>
+
+        <service android:name="com.amap.api.location.APSService" />
+
+
+        <provider
+            android:name=".view.provider.MyProvider"
+            android:authorities="com.ning.demosky.provider"
+            android:exported="true" />
     </application>
 
 </manifest>

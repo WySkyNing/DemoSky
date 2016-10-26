@@ -34,4 +34,10 @@
         android:layout_height="wrap_content"
         android:text="@string/custom_view_5" />
 
+    <Button
+        android:id="@+id/custom_btn_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/custom_view_6" />
+
 </LinearLayout>

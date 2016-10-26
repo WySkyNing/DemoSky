@@ -65,7 +65,17 @@ public class CustomViewActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(CustomViewActivity.this,ViewGroupActivity.class);
+                Intent intent = new Intent(CustomViewActivity.this,ViewGroupActivity1.class);
+                startActivity(intent);
+            }
+        });
+
+        Button custom_btn_6 = (Button) findViewById(R.id.custom_btn_6);
+        custom_btn_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(CustomViewActivity.this,ViewGroupActivity2.class);
                 startActivity(intent);
             }
         });

@@ -15,16 +15,18 @@ import android.view.ViewGroup;
  * (measure 参数的值你可以自己定义)，否则你得到的结果和getWidth()得到的结果一样。
  * 关於这两个方法的区别就是看你有没有用measure()方法，当然measure（）的位置也是很重要的。
  */
-public class CustomViewGroup extends ViewGroup {
-    public CustomViewGroup(Context context) {
+public class CustomViewGroup1 extends ViewGroup {
+
+    /** 只是重写了两个方法 一个测量自己 一个测量子 view */
+    public CustomViewGroup1(Context context) {
         super(context);
     }
 
-    public CustomViewGroup(Context context, AttributeSet attrs) {
+    public CustomViewGroup1(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CustomViewGroup(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomViewGroup1(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

@@ -73,7 +73,7 @@ public class ViewActivity extends AppCompatActivity {
 
     }
 
-    private  class MyThreadRunnable implements Runnable{
+    private class MyThreadRunnable implements Runnable{
 
         @Override
         public void run() {

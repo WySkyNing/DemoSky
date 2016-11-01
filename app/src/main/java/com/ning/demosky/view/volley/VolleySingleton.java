@@ -99,4 +99,6 @@ public class VolleySingleton {
         ImageLoader.ImageListener listener = ImageLoader.getImageListener(img,defaultImg,errorImg);
         getImageLoader().get(url,listener);
     }
+
+
 }

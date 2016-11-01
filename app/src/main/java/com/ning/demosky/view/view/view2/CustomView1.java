@@ -204,10 +204,8 @@ public class CustomView1 extends View {
         //目的 上下居中
 //        Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
 //        int baseline = (getMeasuredHeight() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
-        /**
-         * 参数 2 ，3 指文字在(当前 view )的位置 y 为文字底部线的位置
-         * 类似于 padding
-         * */
+
+       /** rect 文字的宽高 */
         canvas.drawText(sText, getWidth() / 2 - rect.width() / 2, getHeight() / 2 + rect.height() / 2, paint);
         //canvas.drawText(sText, 0,10, paint);
         //canvas.drawText(sText, getWidth() / 2 - rect.width() / 2, baseline, paint);

@@ -76,7 +76,7 @@ public class CustomViewGroup1 extends ViewGroup {
                     break;
             }
             cr = cl + cWidth;
-            cb = ct + cHeight;
+            cb = ct + cHeight                                                                                                                                                         ;
             childView.layout(cl, ct, cr, cb);
         }
     }

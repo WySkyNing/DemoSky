@@ -11,7 +11,7 @@ import com.ning.demosky.view.mvp.Base.BaseActivity;
 import com.ning.demosky.view.photo.SelectPhotoActivity;
 import com.ning.demosky.view.photo.apps.activity.AlbumsActivity;
 import com.ning.demosky.view.provider.ProviderActivity;
-import com.ning.demosky.view.view.view2.CustomViewActivity;
+import com.ning.mylibrary.view2.CustomViewActivity;
 
 /**
  * Created by wy on 2016/10/11.

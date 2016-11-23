@@ -43,23 +43,23 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.view.ViewActivity" />
+        <activity android:name="com.ning.mylibrary.ViewActivity" />
         <activity android:name=".view.db.DbActivity" />
         <activity android:name=".view.provider.ProviderActivity" />
         <activity android:name=".view.photo.SelectPhotoActivity" />
         <activity android:name=".view.photo.PhotoActivity" />
-        <activity android:name=".view.view.view2.CustomViewActivity"/>
+        <activity android:name="com.ning.mylibrary.view2.CustomViewActivity"/>
 
         <activity android:name=".view.photo.apps.activity.AlbumItemActivity"/>
         <activity android:name=".view.photo.apps.activity.AlbumsActivity"/>
         <activity android:name=".view.photo.apps.activity.SelectedImagesActivity"/>
 
-        <activity android:name=".view.view.view2.CustomActivity1"/>
-        <activity android:name=".view.view.view2.CustomActivity2"/>
-        <activity android:name=".view.view.view2.CustomActivity3"/>
-        <activity android:name=".view.view.view2.CustomActivity4"/>
-        <activity android:name=".view.view.view2.ViewGroupActivity1"/>
-        <activity android:name=".view.view.view2.ViewGroupActivity2"/>
+        <activity android:name="com.ning.mylibrary.view2.CustomActivity1"/>
+        <activity android:name="com.ning.mylibrary.view2.CustomActivity2"/>
+        <activity android:name="com.ning.mylibrary.view2.CustomActivity3"/>
+        <activity android:name="com.ning.mylibrary.view2.CustomActivity4"/>
+        <activity android:name="com.ning.mylibrary.view2.ViewGroupActivity1"/>
+        <activity android:name="com.ning.mylibrary.view2.ViewGroupActivity2"/>
 
         <activity android:name="com.ning.mylibrary.TextActivity"/>
 

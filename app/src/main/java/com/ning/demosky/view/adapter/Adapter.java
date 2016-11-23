@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.ning.demosky.R;
-import com.ning.demosky.view.listview.DataBean;
+import com.ning.mylibrary.topbtnpulllist.DataBean;
 
 import java.util.List;
 

@@ -1,1 +1,1 @@
-include ':app', ':customview', ':mylibrary'
+include ':app', ':myModule', ':customview'

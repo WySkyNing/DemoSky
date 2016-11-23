@@ -169,7 +169,7 @@ public class CustomView1 extends View {
 
             float textWidth = rect.width();
 
-            width = (int) (getPaddingLeft() + textWidth + 5+ getPaddingRight());
+            width = (int) (getPaddingLeft() + textWidth + getPaddingRight());
 
 //            float density = getResources().getDisplayMetrics().density;
 //            float w = getPaddingLeft() + textWidth + getPaddingRight();
@@ -196,6 +196,14 @@ public class CustomView1 extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        /**
+         *  先给出一个结论：
+         *  getMeasuredWidth() 获取的是 view 原始得大小
+         *  也就是这个 view 在 XML 文件中配置或者代码中设置的大小
+         *  getWidth() 获取的 是这个 view 最终显示的大小，
+         *  这个大小有可能是原始的大小也有可能是不等于原始大小
+         * */
+
         paint.setColor(Color.GREEN);
         canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), paint);
 
@@ -206,9 +214,14 @@ public class CustomView1 extends View {
 //        int baseline = (getMeasuredHeight() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
 
        /** rect 文字的宽高 */
+        /** 画文字的时候 宽坐标是文字的头开始 高坐标是文字的低部线为准 */
         canvas.drawText(sText, getWidth() / 2 - rect.width() / 2, getHeight() / 2 + rect.height() / 2, paint);
+
         //canvas.drawText(sText, 0,10, paint);
         //canvas.drawText(sText, getWidth() / 2 - rect.width() / 2, baseline, paint);
+        Log.e("onDraw","getWidth: " + getWidth()
+                +  "\n getMeasuredWidth: " + getMeasuredWidth()
+                +  "\n rect.width: " + rect.width());
 
     }
 

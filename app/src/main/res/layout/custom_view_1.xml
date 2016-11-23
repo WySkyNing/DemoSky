@@ -4,9 +4,11 @@
     xmlns:myview="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <!--xmlns:myview  随便起名-->
+    <!--xmlns:myview  myview 随便起名-->
+    <!--text_-->
     <!--但是 后面得属性名一定要和 attrs 里面定义得一样-->
     <!--但是 后面得属性名一定要和 attrs 里面定义得一样-->
     <!--但是 后面得属性名一定要和 attrs 里面定义得一样-->

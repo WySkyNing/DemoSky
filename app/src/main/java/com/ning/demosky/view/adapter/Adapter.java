@@ -25,7 +25,7 @@ public class Adapter extends CommonAdapter<DataBean>{
         ViewHolder viewHolder = ViewHolder.getViewHolder(mContext,parent, R.layout.item_list_view,
                 position,convertView);
 
-        TextView textView = viewHolder.getView(R.id.list_view_item_text_view);
+        TextView textView = (TextView) viewHolder.getView(R.id.list_view_item_text_view);
 
         textView.setText(listData.get(position).getData());
 

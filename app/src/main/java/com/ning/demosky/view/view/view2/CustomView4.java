@@ -61,6 +61,8 @@ public class CustomView4 extends View {
 
     private Rect mRect;
 
+    private Bitmap bitmapRun_0,bitmapRun_1;
+
     public CustomView4(Context context) {
         this(context, null);
     }
@@ -122,6 +124,8 @@ public class CustomView4 extends View {
         mPaint.setStyle(Paint.Style.STROKE); //设置空心
 
 
+        bitmapRun_0 = BitmapFactory.decodeResource(getResources(),R.drawable.explode_1);
+        bitmapRun_1 = BitmapFactory.decodeResource(getResources(),R.drawable.explode_3);
     }
 
     @Override
@@ -162,10 +166,21 @@ public class CustomView4 extends View {
             mRect.bottom = mRect.top + mImage.getHeight();
 
         }
+
+        if (run){
+            mImage = bitmapRun_0;
+            run = false;
+
+        }else {
+            mImage = bitmapRun_1;
+            run = true;
+        }
+
         // 绘图
         canvas.drawBitmap(mImage, null, mRect, mPaint);
 
     }
+    private  boolean run = true;
 
     /**
      * @param centre 圆心 x 坐标

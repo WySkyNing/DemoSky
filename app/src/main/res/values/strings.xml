@@ -9,6 +9,7 @@
     <string name="main_btn_2_text">内容提供者</string>
     <string name="main_btn_3_text">自定义图库</string>
     <string name="main_btn_4_text">自定义view</string>
+    <string name="main_btn_5_text">Handler Activity</string>
 
 
 </resources>

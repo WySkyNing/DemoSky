@@ -27,4 +27,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/main_btn_4_text"/>
+
+    <Button
+        android:id="@+id/main_btn_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_btn_5_text"/>
 </LinearLayout>

@@ -14,13 +14,12 @@ import java.lang.ref.WeakReference;
 
 /**
  * Created by wy on 2016/5/27.
- *
  */
 public class ViewActivity extends AppCompatActivity {
 
     private static boolean isRun = true;
 
-    private  MyHandler myHandler;
+    private MyHandler myHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,16 +50,19 @@ public class ViewActivity extends AppCompatActivity {
     protected void onDestroy() {
 
         isRun = false;
+        if (myHandler != null) {
+            myHandler.removeCallbacksAndMessages(null);
+        }
         myHandler = null;
         super.onDestroy();
 
     }
 
-    private static class MyHandler extends Handler{
+    private static class MyHandler extends Handler {
 
         WeakReference<ViewActivity> activityWeakReference;
 
-        public MyHandler(ViewActivity activity){
+        MyHandler(ViewActivity activity) {
 
             activityWeakReference = new WeakReference<>(activity);
         }
@@ -73,22 +75,22 @@ public class ViewActivity extends AppCompatActivity {
 
     }
 
-    private class MyThreadRunnable implements Runnable{
+    private class MyThreadRunnable implements Runnable {
 
         @Override
         public void run() {
 
-            while (isRun){
+            while (isRun) {
 
                 try {
                     Thread.sleep(3000);
-                    Log.e("wwwwwyyyyyy","xn");
+                    Log.e("wwwwwyyyyyy", "xn");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
-            if (null != myHandler){
+            if (null != myHandler) {
                 myHandler.sendEmptyMessage(0);
             }
 

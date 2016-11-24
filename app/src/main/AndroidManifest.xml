@@ -61,7 +61,7 @@
         <activity android:name="com.ning.mylibrary.view2.ViewGroupActivity1"/>
         <activity android:name="com.ning.mylibrary.view2.ViewGroupActivity2"/>
 
-        <activity android:name="com.ning.mylibrary.TextActivity"/>
+        <activity android:name=".view.thread.HandlerActivity"/>
 
         <service android:name="com.amap.api.location.APSService" />
 

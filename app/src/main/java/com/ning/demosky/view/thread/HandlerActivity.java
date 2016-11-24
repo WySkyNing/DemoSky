@@ -19,13 +19,15 @@ import java.lang.ref.WeakReference;
  *
  */
 
-public class HandlerActivity extends AppCompatActivity {
+public class HandlerActivity extends AppCompatActivity implements CustomHandler.HandlerInterface{
 
     private static boolean isRun = true;
 
-    private MyHandler myHandler;
+   // private MyHandler myHandler;
 
     private TextView textView;
+
+    private CustomHandler<HandlerActivity> customHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,36 +46,44 @@ public class HandlerActivity extends AppCompatActivity {
 
 
         //TODO 方法 1
-        myHandler = new MyHandler(this);
+      //  myHandler = new MyHandler(this);
 
         MyThreadRunnable myThread = new MyThreadRunnable();
         Thread thread = new Thread(myThread);
         thread.start();
         //TODO 方法 1
 
+
+        customHandler = new CustomHandler<>(this);
+    }
+
+    @Override
+    public void mHandleMessage(Message message) {
+
+        textView.setText(R.string.main_btn_5_text);
     }
 
 
     //TODO 方法 1
-    private static class MyHandler extends Handler {
-
-        WeakReference<HandlerActivity> activityWeakReference;
-
-        MyHandler(HandlerActivity activity) {
-
-            activityWeakReference = new WeakReference<>(activity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            HandlerActivity handlerActivity = activityWeakReference.get();
-            handlerActivity.textView.setText(R.string.main_btn_5_text);
-
-        }
-
-    }
+//    private static class MyHandler extends Handler {
+//
+//        WeakReference<HandlerActivity> activityWeakReference;
+//
+//        MyHandler(HandlerActivity activity) {
+//
+//            activityWeakReference = new WeakReference<>(activity);
+//        }
+//
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//
+//            HandlerActivity handlerActivity = activityWeakReference.get();
+//            handlerActivity.textView.setText(R.string.main_btn_5_text);
+//
+//        }
+//
+//    }
 
     //TODO 方法 1
     private class MyThreadRunnable implements Runnable {
@@ -91,8 +101,13 @@ public class HandlerActivity extends AppCompatActivity {
 
                 }
 
-                if (null != myHandler) {
-                    myHandler.sendEmptyMessage(0);
+//                if (null != myHandler) {
+//                    myHandler.sendEmptyMessage(0);
+//
+//                }
+
+                if (null != customHandler){
+                    customHandler.sendEmptyMessage(0);
                 }
             }
         }
@@ -103,9 +118,9 @@ public class HandlerActivity extends AppCompatActivity {
 
         //TODO 方法 1
         isRun = false;
-        if (myHandler != null) {
-            myHandler.removeCallbacksAndMessages(null);
-            myHandler = null;
+        if (customHandler != null) {
+            customHandler.removeCallbacksAndMessages(null);
+            customHandler = null;
         }
         //TODO 方法 1
 

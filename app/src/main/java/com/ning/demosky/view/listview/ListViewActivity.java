@@ -12,13 +12,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.ning.demosky.R;
 import com.ning.demosky.view.mvp.model.Entity;
-import com.ning.demosky.view.volley.VolleySingleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 /**
  * Created by Administrator on 2016/6/30.
+ *
  */
 public class ViewHolder {
 
@@ -47,7 +48,7 @@ public class ViewHolder {
     }
 
     /* 返回 convertView */
-    public View getmConvertView() {
+    View getmConvertView() {
         return mConvertView;
     }
 
@@ -55,7 +56,7 @@ public class ViewHolder {
      *  通过 viewId 获取控件
      *  @param viewId 控件 ID
      *  */
-    public <T extends View> T getView(int viewId){
+    public View getView(int viewId){
 
         View view = mViews.get(viewId);
 
@@ -63,6 +64,6 @@ public class ViewHolder {
             view = mConvertView.findViewById(viewId);
         }
 
-        return (T) view;
+        return  view;
     }
 }

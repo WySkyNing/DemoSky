@@ -6,8 +6,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.GridView;
+import com.ning.mylibrary.R;
 
-import com.ning.demosky.R;
 
 /**
  * Created by wy on 2016/7/4.

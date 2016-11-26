@@ -11,7 +11,8 @@ import com.ning.demosky.view.mvp.Base.BaseActivity;
 import com.ning.demosky.view.photo.SelectPhotoActivity;
 import com.ning.demosky.view.photo.apps.activity.AlbumsActivity;
 import com.ning.demosky.view.provider.ProviderActivity;
-import com.ning.demosky.view.view.view2.CustomViewActivity;
+import com.ning.demosky.view.thread.HandlerActivity;
+import com.ning.mylibrary.view2.CustomViewActivity;
 
 /**
  * Created by wy on 2016/10/11.
@@ -75,6 +76,14 @@ public class MainActivity extends BaseActivity{
             }
         });
 
+        Button btn_5 = (Button) findViewById(R.id.main_btn_5);
+        btn_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent intent = new Intent(MainActivity.this, HandlerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

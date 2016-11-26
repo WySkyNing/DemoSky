@@ -11,6 +11,9 @@ import android.widget.ListView;
 import com.ning.demosky.R;
 import android.widget.Toast;
 import com.ning.demosky.view.adapter.Adapter;
+import com.ning.mylibrary.topbtnpulllist.DataBean;
+import com.ning.mylibrary.topbtnpulllist.ListViewAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 

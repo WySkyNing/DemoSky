@@ -5,9 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/DemoSky.iml" filepath="$PROJECT_DIR$/DemoSky.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/customview/customview.iml" filepath="$PROJECT_DIR$/customview/customview.iml" />
-      <module fileurl="file://$PROJECT_DIR$/customview/customview.iml" filepath="$PROJECT_DIR$/customview/customview.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyModule/myModule.iml" filepath="$PROJECT_DIR$/MyModule/myModule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/myModule/myModule.iml" filepath="$PROJECT_DIR$/myModule/myModule.iml" />
     </modules>
   </component>
 </project>

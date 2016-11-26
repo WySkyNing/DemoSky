@@ -9,6 +9,8 @@ import android.widget.Button;
 import com.ning.mylibrary.R;
 import com.ning.mylibrary.view3.slidedel.SidleDelListViewActivity;
 
+import com.ning.mylibrary.R;
+
 
 /**
  * Created by wy on 2016/10/11.

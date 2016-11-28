@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import com.ning.mylibrary.R;
+import com.ning.mylibrary.view3.slidedel.SidleDelListViewActivity;
 
 import com.ning.mylibrary.R;
 
@@ -77,6 +79,16 @@ public class CustomViewActivity extends AppCompatActivity{
             public void onClick(View v) {
 
                 Intent intent = new Intent(CustomViewActivity.this,ViewGroupActivity2.class);
+                startActivity(intent);
+            }
+        });
+
+        Button custom_btn_7 = (Button) findViewById(R.id.custom_btn_7);
+        custom_btn_7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(CustomViewActivity.this,SidleDelListViewActivity.class);
                 startActivity(intent);
             }
         });

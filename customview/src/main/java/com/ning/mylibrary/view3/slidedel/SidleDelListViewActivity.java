@@ -19,9 +19,7 @@ import java.util.List;
 
 public class SidleDelListViewActivity extends AppCompatActivity{
 
-    private SidleDelListView mListView;
-    private List<String> mDatas;
-    private ArrayAdapter adapter;
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,14 +27,15 @@ public class SidleDelListViewActivity extends AppCompatActivity{
 
         setContentView(R.layout.activity_sidle_del_list_view);
 
-        mListView = (SidleDelListView) findViewById(R.id.list_view);
+        SidleDelListView mListView = (SidleDelListView) findViewById(R.id.list_view);
 
-        mDatas = new ArrayList<>(Arrays.asList("HelloWorld", "Welcome", "Java",
+        List<String> mDatas = new ArrayList<>(Arrays.asList("HelloWorld", "Welcome", "Java",
                 "Android", "Servlet", "Struts",
                 "Hibernate", "Spring", "HTML5", "Javascript", "Lucene"));
 
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,mDatas);
+        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, mDatas);
 
+        assert mListView != null;
         mListView.setAdapter(adapter);
 
         mListView.setDeleteBtnClickListener(new SidleDelListView.DeleteBtnClickListener()

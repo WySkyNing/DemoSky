@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.ning.demosky.R;
 import com.ning.demosky.view.db.DbActivity;
 import com.ning.demosky.view.mvp.Base.BaseActivity;
+import com.ning.demosky.view.permission.PermissionActivity;
 import com.ning.demosky.view.photo.SelectPhotoActivity;
 import com.ning.demosky.view.photo.apps.activity.AlbumsActivity;
 import com.ning.demosky.view.provider.ProviderActivity;
@@ -82,6 +83,16 @@ public class MainActivity extends BaseActivity{
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, HandlerActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button btn_6 = (Button) findViewById(R.id.main_btn_6);
+        btn_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, PermissionActivity.class);
                 startActivity(intent);
             }
         });

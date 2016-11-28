@@ -10,6 +10,8 @@
     <string name="main_btn_3_text">自定义图库</string>
     <string name="main_btn_4_text">自定义view</string>
     <string name="main_btn_5_text">Handler Activity</string>
+    <string name="main_btn_6_text">6.0权限</string>
+
 
 
 </resources>

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ning.demosky">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
@@ -11,6 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <!--//定位包、导航包需要的额外权限（注：基础权限也需要）-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -60,6 +62,8 @@
         <activity android:name="com.ning.mylibrary.view2.ViewGroupActivity2" />
         <activity android:name="com.ning.mylibrary.view3.slidedel.SidleDelListViewActivity" />
         <activity android:name=".view.thread.HandlerActivity" />
+
+        <activity android:name=".view.permission.PermissionActivity"/>
 
 
         <service android:name="com.amap.api.location.APSService" />

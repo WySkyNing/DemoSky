@@ -87,7 +87,6 @@ public class PermissionUtils {
 
         //如果是6.0以下的手机，ActivityCompat.checkSelfPermission()会始终等于PERMISSION_GRANTED，
         // 但是，如果用户关闭了你申请的权限，ActivityCompat.checkSelfPermission(),
-        // 会导致程序崩溃(java.lang.RuntimeException: Unknown exception code: 1 msg null)，
         // 你可以使用try{}catch(){},处理异常，也可以在这个地方，低于23就什么都不做，
         // 个人建议try{}catch(){}单独处理，提示用户开启权限。
 //        if (Build.VERSION.SDK_INT < 23) {
@@ -100,12 +99,15 @@ public class PermissionUtils {
         } catch (RuntimeException e) {
             Toast.makeText(activity, "please open this permission", Toast.LENGTH_SHORT)
                     .show();
+
             Log.e(TAG, "lease open this permission ");
+
             Log.e(TAG, "RuntimeException:" + e.getMessage());
             return;
         }
 
         if (checkSelfPermission != PackageManager.PERMISSION_GRANTED) {
+
             Log.i(TAG, "_ActivityCompat.checkSelfPermission != PackageManager.PERMISSION_GRANTED");
 
 
@@ -114,10 +116,12 @@ public class PermissionUtils {
                 shouldShowRationale(activity, requestCode, requestPermission);
 
             } else {
+
                 Log.i(TAG, "requestCameraPermission else");
                 ActivityCompat.requestPermissions(activity, new String[]{requestPermission}, requestCode);
             }
             Log.i(TAG, "_ActivityCompat.checkSelfPermission != PackageManager.PERMISSION_GRANTED");
+
 
 
         } else {

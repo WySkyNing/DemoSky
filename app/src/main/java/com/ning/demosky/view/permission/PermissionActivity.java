@@ -39,6 +39,7 @@ public class PermissionActivity extends AppCompatActivity {
        PermissionUtils.requestPermission(this, PermissionUtils.CODE_CALL_PHONE, permissionGrant);
 
        // checkSelfPermission();
+
     }
 
 
@@ -55,7 +56,7 @@ public class PermissionActivity extends AppCompatActivity {
 
                 Log.e("wy__","wy___");
             }
-            Log.e("wy__","wy___");
+
         }
     };
 
@@ -63,6 +64,7 @@ public class PermissionActivity extends AppCompatActivity {
      *  checkSelfPermission 检查是否拥有这个权限,如果已经开启则直接执行想要做的事情
      *  requestPermissions 请求权限，一般会弹出一个系统对话框，询问用户是否开启这个权限。
      * */
+
     private void checkSelfPermission(){
 
         if (ContextCompat.checkSelfPermission(PermissionActivity.this, Manifest.permission.CALL_PHONE)
@@ -87,9 +89,11 @@ public class PermissionActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * 请求权限的回调
      * */
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 

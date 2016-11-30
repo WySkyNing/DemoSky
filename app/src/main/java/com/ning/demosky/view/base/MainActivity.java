@@ -13,6 +13,8 @@ import com.ning.demosky.view.photo.SelectPhotoActivity;
 import com.ning.demosky.view.photo.apps.activity.AlbumsActivity;
 import com.ning.demosky.view.provider.ProviderActivity;
 import com.ning.demosky.view.thread.HandlerActivity;
+import com.ning.demosky.view.upapp.DownloadService;
+import com.ning.demosky.view.upapp.UpDataManager;
 import com.ning.mylibrary.view2.CustomViewActivity;
 
 /**
@@ -96,5 +98,12 @@ public class MainActivity extends BaseActivity{
                 startActivity(intent);
             }
         });
+
+
+//        UpDataManager manager = new UpDataManager(getApplicationContext());
+//        manager.checkUpData();
+
+        DownloadService.startDownload(this,
+                "http://api.ocarlife.cn/car/versionType/car_owner_apk/loveCar-release(20161124).apk");
     }
 }

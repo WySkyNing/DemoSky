@@ -21,22 +21,21 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
  * Created by Administrator on 2016/4/28.
+ *
  */
 public class UpDataManager {
 
     private File akpFile;
 
-    public static final String PATH = "http://api.ocarlife.cn/car/versionType/android_store_version.xml";
+    private String PATH = "http://api.ocarlife.cn/car/versionType/android_store_version.xml";
     private static final int DOWNLOADING = 1;//正在下载
     private static final int DOWNLOAD_FINISH = 2;//下载完成
 
@@ -85,8 +84,6 @@ public class UpDataManager {
 
                     parseXMLWithPull(is);
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }finally {
@@ -287,7 +284,6 @@ public class UpDataManager {
                 case 3:
 
                     if (isUpData()) {
-                        //Toast.makeText(mContext, "需要更新", Toast.LENGTH_SHORT).show();
                         showNoticeDialog();
                     } else {
                         Toast.makeText(mContext, "不需要更新", Toast.LENGTH_SHORT).show();
@@ -374,10 +370,6 @@ public class UpDataManager {
                         inputStream.close();
 
 
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -417,7 +409,6 @@ public class UpDataManager {
     /**
      * 创建文件根目录
      *
-     * @param context
      * @param path
      * @return
      */
@@ -425,7 +416,7 @@ public class UpDataManager {
         if (null == path) {
             return null;
         }
-        File dirFile = null;
+        File dirFile;
         if (!isSDCardExist()) {
             Log.e(TAG, "SDCard Unavailable");
             return null;
@@ -433,10 +424,6 @@ public class UpDataManager {
         if (!isHasSDCardPermission(context)) {
             Log.e(TAG,
                     "No android.permission.WRITE_EXTERNAL_STORAGE Permission");
-            return null;
-        }
-        if (null == path) {
-            Log.e(TAG, "FilePath is null");
             return null;
         }
         dirFile = new File(path);
@@ -449,14 +436,10 @@ public class UpDataManager {
     /**
      * 获取当前SD卡是否可用
      *
-     * @return
      */
-    public static boolean isSDCardExist() {
-        if (Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
-            return true;
-        }
-        return false;
+    private static boolean isSDCardExist() {
+        return Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED);
     }
 
 
@@ -467,10 +450,8 @@ public class UpDataManager {
     /**
      * 判断是否有读取SD权限
      *
-     * @param context
-     * @return
      */
-    public static boolean isHasSDCardPermission(Context context) {
+    private static boolean isHasSDCardPermission(Context context) {
         int permission = context
                 .checkCallingOrSelfPermission(EXTERNAL_STORAGE_PERMISSION);
         return permission == PackageManager.PERMISSION_GRANTED;

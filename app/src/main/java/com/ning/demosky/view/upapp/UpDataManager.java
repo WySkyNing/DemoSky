@@ -4,19 +4,25 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.ning.demosky.R;
+import com.ning.demosky.view.utils.SharedPreferenceUtil;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -45,6 +51,8 @@ public class UpDataManager {
     private  String mVersion_name = "";
     private  String mVersion_desc = "";
     private  String mVersion_path = "";
+
+    private final String IS_NO_HINT_UP_APP_VERSION_CODE = "isNoHintUpAppVersionCode";
 
     private Context mContext;
 
@@ -187,7 +195,16 @@ public class UpDataManager {
                 e.printStackTrace();
             }
 
-            return serviceVersionCode > localVersionCode;
+            if (serviceVersionCode > localVersionCode) {
+
+                String spVersionCode = SharedPreferenceUtil
+                        .getSharedStringData(mContext, IS_NO_HINT_UP_APP_VERSION_CODE);
+                Log.e("wy__spVersionCode",spVersionCode + "mVersion_code: " + mVersion_code);
+                return TextUtils.isEmpty(spVersionCode) || !spVersionCode.equals(mVersion_code);
+
+            }
+
+            return false;
 
         }
         return false;
@@ -200,11 +217,26 @@ public class UpDataManager {
     private void showNoticeDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setTitle("提示");
-        String message = "有新的版本,是否需要更新?" + mVersion_desc;
-        builder.setMessage(message);
 
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        TextView textView = new TextView(mContext);
+        textView.setTextSize(20);
+        textView.setText("发现新版本");
+        textView.setTextColor(Color.parseColor("#33B5E5"));
+        textView.setPadding(20,10,10,10);
+        builder.setCustomTitle(textView);
+
+        View view = LayoutInflater.from(mContext).inflate(R.layout.up_app_dialog,null);
+        TextView upMessage = (TextView) view.findViewById(R.id.tv_up_app_message);
+        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.up_app_dialog_check_box);
+
+        upMessage.setText("1.界面美化 \n2.系统优化 \n3.你说是什么就是什么你知道么不知道拉到你只是是试试喉舌你没就开始");
+
+        builder.setView(view);
+
+
+
+
+        builder.setPositiveButton("更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //隐藏对话框
@@ -214,11 +246,17 @@ public class UpDataManager {
             }
         });
 
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("下次再说", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //隐藏对话框
                 dialog.dismiss();
+                if (checkBox.isChecked()){
+                    SharedPreferenceUtil
+                            .setSharedStringData(mContext,IS_NO_HINT_UP_APP_VERSION_CODE,mVersion_code);
+
+                    Log.e("wy__",mVersion_code);
+                }
             }
         });
 
@@ -285,8 +323,6 @@ public class UpDataManager {
 
                     if (isUpData()) {
                         showNoticeDialog();
-                    } else {
-                        Toast.makeText(mContext, "不需要更新", Toast.LENGTH_SHORT).show();
                     }
 
                     break;

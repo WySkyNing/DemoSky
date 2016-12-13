@@ -12,12 +12,19 @@
     <!--但是 后面得属性名一定要和 attrs 里面定义得一样-->
     <!--但是 后面得属性名一定要和 attrs 里面定义得一样-->
     <!--但是 后面得属性名一定要和 attrs 里面定义得一样-->
+    <com.ning.mylibrary.view3.FiveView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fiveView" />
+
     <com.ning.mylibrary.view2.CustomView1
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
         myview:textColor="#ff0000"
         myview:textSize="30sp"
-        myview:text_="2345" />
+        myview:text_="2345"
+        android:visibility="gone"/>
+
 
 </LinearLayout>

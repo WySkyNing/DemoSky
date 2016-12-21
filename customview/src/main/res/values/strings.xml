@@ -7,5 +7,6 @@
     <string name="custom_view_5">Custom_ViewGroup_1</string>
     <string name="custom_view_6">Custom_ViewGroup_2</string>
     <string name="custom_view_7">滑动删除按钮-ListView</string>
+    <string name="custom_view_8">不同颜色大小-TextView</string>
 
 </resources>

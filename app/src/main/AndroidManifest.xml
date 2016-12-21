@@ -62,6 +62,7 @@
         <activity android:name="com.ning.mylibrary.view2.ViewGroupActivity2" />
         <activity android:name="com.ning.mylibrary.view3.slidedel.SidleDelListViewActivity" />
         <activity android:name=".view.thread.HandlerActivity" />
+        <activity android:name="com.ning.mylibrary.textview.DifferentTextViewActivity"/>
 
         <activity android:name=".view.permission.PermissionActivity"/>
 

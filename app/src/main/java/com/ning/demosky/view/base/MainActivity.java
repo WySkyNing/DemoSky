@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import com.ning.demosky.R;
 import com.ning.demosky.view.db.DbActivity;
 import com.ning.demosky.view.mvp.Base.BaseActivity;
+import com.ning.demosky.view.okhttp.NetRequestResultInter;
+import com.ning.demosky.view.okhttp.OkHttpSingleton;
 import com.ning.demosky.view.permission.PermissionActivity;
 import com.ning.demosky.view.photo.SelectPhotoActivity;
 import com.ning.demosky.view.photo.apps.activity.AlbumsActivity;
@@ -20,13 +23,30 @@ import com.ning.demosky.view.provider.ProviderActivity;
 import com.ning.demosky.view.thread.HandlerActivity;
 import com.ning.demosky.view.upapp.DownloadService;
 import com.ning.demosky.view.upapp.UpDataManager;
+import com.ning.demosky.view.utils.L;
 import com.ning.mylibrary.view2.CustomViewActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by wy on 2016/10/11.
  *
  */
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
+
+    private Button btn_6;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,7 +139,7 @@ public class MainActivity extends BaseActivity{
             }
         });
 
-        Button btn_6 = (Button) findViewById(R.id.main_btn_6);
+        btn_6 = (Button) findViewById(R.id.main_btn_6);
         btn_6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,5 +155,107 @@ public class MainActivity extends BaseActivity{
 
 //        DownloadService.startDownload(this,
 //                "http://api.ocarlife.cn/car/versionType/car_owner_apk/loveCar-release(20161124).apk");
+
+
+        /**
+         * OkHttp
+         * */
+
+
+        postRequest();
+
+
+
     }
+
+
+    private void getRequset(){
+
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+
+        Request request = new Request.Builder().url("https://www.baidu.com").build();
+
+        Call call = mOkHttpClient.newCall(request);
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                Log.e("wy_no",e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                Log.e("wy_ok",response.body().string());
+            }
+        });
+    }
+
+    private void postRequest(){
+
+        L.e("www","www");
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+
+        FormBody formBody = new FormBody.Builder()
+                .add("userPhoneNumber","18842606495")
+                .add("userPassWord","123")
+                .build();
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userPhoneNumber","18842606495");
+            jsonObject.put("userPassWord","123");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        OkHttpSingleton.getInstance().startJsonRequest(jsonObject, "http://218.60.28.101/car/API/API_O2_LOGIN_USER"
+                , null, new NetRequestResultInter() {
+                    @Override
+                    public <T> void onNetRequestSuccess(T result, String tag) {
+
+                    }
+
+                    @Override
+                    public <T> void onNetRequestError(T errorInfo) {
+
+                    }
+                },"");
+
+        MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
+
+        RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON,jsonObject.toString());
+
+        Request request = new Request.Builder()
+                .post(requestBody)
+                .url("http://218.60.28.101/car/API/API_O2_LOGIN_USER")
+                .build();
+
+        Call call = okHttpClient.newCall(request);
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                Log.e("wy_no",e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+
+                Log.e("wy_ok",response.body().string());
+
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        btn_6.setText("sdfsdf");
+                    }
+                });
+            }
+        });
+    }
+
 }

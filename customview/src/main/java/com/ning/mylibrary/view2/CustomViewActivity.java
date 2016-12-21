@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import com.ning.mylibrary.R;
+import com.ning.mylibrary.textview.DifferentTextViewActivity;
 import com.ning.mylibrary.view3.slidedel.SidleDelListViewActivity;
 
 import com.ning.mylibrary.R;
@@ -89,6 +90,16 @@ public class CustomViewActivity extends AppCompatActivity{
             public void onClick(View v) {
 
                 Intent intent = new Intent(CustomViewActivity.this,SidleDelListViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button custom_btn_8 = (Button) findViewById(R.id.custom_btn_8);
+        custom_btn_8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(CustomViewActivity.this,DifferentTextViewActivity.class);
                 startActivity(intent);
             }
         });

@@ -106,7 +106,9 @@ public class OkHttpSingleton {
                 }
 
 
-                netRequestResultInter.onNetRequestSuccess(response.body().charStream(), tag);
+                netRequestResultInter.onNetRequestSuccess(response.body().string(), tag);
+
+
             }
         });
 

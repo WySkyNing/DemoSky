@@ -4,9 +4,9 @@ package com.ning.demosky.view.okhttp;
  * Created by yorki on 2016/12/21.
  */
 
-public interface NetRequestResultInter {
+public interface NetRequestResultInter<T> {
 
-    <T> void onNetRequestSuccess(T result,String tag);
+    void onNetRequestSuccess(T result, String tag);
 
-    <T> void onNetRequestError(T errorInfo);
+    void onNetRequestError(T errorInfo);
 }

@@ -214,15 +214,15 @@ public class MainActivity extends BaseActivity {
         OkHttpSingleton.getInstance().startJsonRequest(jsonObject, "http://218.60.28.101/car/API/API_O2_LOGIN_USER"
                 , null, new NetRequestResultInter() {
                     @Override
-                    public <T> void onNetRequestSuccess(T result, String tag) {
+                    public void onNetRequestSuccess(Object result, String tag) {
 
                     }
 
                     @Override
-                    public <T> void onNetRequestError(T errorInfo) {
+                    public void onNetRequestError(Object errorInfo) {
 
                     }
-                },"");
+                }, "");
 
         MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
 

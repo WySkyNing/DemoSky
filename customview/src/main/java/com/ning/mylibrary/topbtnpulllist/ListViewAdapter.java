@@ -9,31 +9,31 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
 import com.ning.mylibrary.R;
+import com.ning.mylibrary.topbtnpulllist.DataBean;
 
 import java.util.List;
 
 /**
  * Created by wy on 2016/6/21.
+ *
  */
 public class ListViewAdapter extends BaseAdapter {
 
     private Context context;
-    private List<DataBean> datas;
+    private List<DataBean> data;
     private LayoutInflater layoutInflater;
 
-    public ListViewAdapter(Context context, List<DataBean> datas) {
+    public ListViewAdapter(Context context, List<DataBean> data) {
         this.context = context;
-        this.datas = datas;
+        this.data = data;
         layoutInflater = LayoutInflater.from(context);
 
     }
 
     @Override
     public int getCount() {
-        return datas.size();
+        return data.size();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ListViewAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder;
 
         if (null == convertView) {
             convertView = layoutInflater.inflate(R.layout.item_list_view, parent, false);
@@ -59,9 +59,9 @@ public class ListViewAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.textView.setText(datas.get(position).getData());
+        viewHolder.textView.setText(data.get(position).getData());
 
-        if (datas.get(position).getNumber() == 1) {
+        if (data.get(position).getNumber() == 1) {
 
             viewHolder.btn2.setVisibility(View.VISIBLE);
 
@@ -69,7 +69,7 @@ public class ListViewAdapter extends BaseAdapter {
             viewHolder.btn1.setVisibility(View.GONE);
             viewHolder.text2.setVisibility(View.GONE);
 
-        } else if (datas.get(position).getNumber() == 2) {
+        } else if (data.get(position).getNumber() == 2) {
 
             viewHolder.imageView.setVisibility(View.VISIBLE);
             viewHolder.text2.setVisibility(View.VISIBLE);
@@ -80,7 +80,7 @@ public class ListViewAdapter extends BaseAdapter {
 
             viewHolder.imageView.setImageResource(R.mipmap.ic_launcher);
 
-        } else if (datas.get(position).getNumber() == 3) {
+        } else if (data.get(position).getNumber() == 3) {
 
             viewHolder.imageView.setVisibility(View.VISIBLE);
             viewHolder.text2.setVisibility(View.VISIBLE);
@@ -91,13 +91,13 @@ public class ListViewAdapter extends BaseAdapter {
 
         }
 
-        if (datas.get(position).getIs()) {
+        if (data.get(position).getIs()) {
             viewHolder.duiuhao.setVisibility(View.VISIBLE);
         } else {
             viewHolder.duiuhao.setVisibility(View.GONE);
         }
 
-        viewHolder.textView.setText(datas.get(position).getData());
+        viewHolder.textView.setText(data.get(position).getData());
         viewHolder.text1.setText("text    1");
         viewHolder.text2.setText("text    2");
         viewHolder.text3.setText("text    3");

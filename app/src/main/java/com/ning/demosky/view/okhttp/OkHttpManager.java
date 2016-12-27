@@ -11,7 +11,8 @@ import java.lang.reflect.Type;
 import okhttp3.OkHttpClient;
 
 /**
- * Created by yorki on 2016/12/22.
+ * Created by wy on 2016/12/22.
+ * OkHttp 封装
  */
 
 public class OkHttpManager {
@@ -42,6 +43,10 @@ public class OkHttpManager {
 
     }
 
+
+    private void deliveryResult(){
+
+    }
 
 
     private void sendSuccessResultCallback(final ResultCallBack resultCallBack,final Object object){
@@ -103,6 +108,7 @@ public class OkHttpManager {
 
 
         }
+
 
 
         public abstract void onNetRequestSuccess(T result);

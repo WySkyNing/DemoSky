@@ -1,36 +1,27 @@
 package com.ning.demosky.view.base;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import com.ning.demosky.R;
 import com.ning.demosky.view.db.DbActivity;
 import com.ning.demosky.view.mvp.Base.BaseActivity;
-import com.ning.demosky.view.okhttp.NetRequestResultInter;
-import com.ning.demosky.view.okhttp.OkHttpSingleton;
+import com.ning.demosky.view.okhttp.okhttp.OkHttpUtils;
+import com.ning.demosky.view.okhttp.okhttp.callback.StringCallback;
 import com.ning.demosky.view.permission.PermissionActivity;
 import com.ning.demosky.view.photo.SelectPhotoActivity;
 import com.ning.demosky.view.photo.apps.activity.AlbumsActivity;
 import com.ning.demosky.view.provider.ProviderActivity;
 import com.ning.demosky.view.thread.HandlerActivity;
-import com.ning.demosky.view.upapp.DownloadService;
 import com.ning.demosky.view.upapp.UpDataManager;
 import com.ning.demosky.view.utils.L;
 import com.ning.mylibrary.view2.CustomViewActivity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -45,8 +36,6 @@ import okhttp3.Response;
  *
  */
 public class MainActivity extends BaseActivity {
-
-    private Button btn_6;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,7 +128,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        btn_6 = (Button) findViewById(R.id.main_btn_6);
+        Button btn_6 = (Button) findViewById(R.id.main_btn_6);
         btn_6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,20 +139,31 @@ public class MainActivity extends BaseActivity {
         });
 
 
-        UpDataManager manager = new UpDataManager(this);
-        manager.checkUpData();
-
-//        DownloadService.startDownload(this,
-//                "http://api.ocarlife.cn/car/versionType/car_owner_apk/loveCar-release(20161124).apk");
-
-
         /**
          * OkHttp
          * */
 
+        //postRequest();
+
+        OkHttpUtils
+                .get()
+                .url("http://www.baidu.com")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+
+                        Log.e("wy_ok",response);
+                    }
+                });
+
 
         postRequest();
-
 
 
     }
@@ -211,18 +211,6 @@ public class MainActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        OkHttpSingleton.getInstance().startJsonRequest(jsonObject, "http://218.60.28.101/car/API/API_O2_LOGIN_USER"
-                , null, new NetRequestResultInter() {
-                    @Override
-                    public void onNetRequestSuccess(Object result, String tag) {
-
-                    }
-
-                    @Override
-                    public void onNetRequestError(Object errorInfo) {
-
-                    }
-                }, "");
 
         MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -234,6 +222,7 @@ public class MainActivity extends BaseActivity {
                 .build();
 
         Call call = okHttpClient.newCall(request);
+
 
         call.enqueue(new Callback() {
             @Override
@@ -251,7 +240,7 @@ public class MainActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        btn_6.setText("sdfsdf");
+
                     }
                 });
             }

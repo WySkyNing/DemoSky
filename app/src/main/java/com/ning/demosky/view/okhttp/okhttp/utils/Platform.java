@@ -36,6 +36,7 @@ public class Platform
 
     private static Platform findPlatform()
     {
+        Log.e("wy_ex","www0");
         try
         {
             Class.forName("android.os.Build");
@@ -65,6 +66,7 @@ public class Platform
 
     static class Android extends Platform
     {
+        
         @Override
         public Executor defaultCallbackExecutor()
         {

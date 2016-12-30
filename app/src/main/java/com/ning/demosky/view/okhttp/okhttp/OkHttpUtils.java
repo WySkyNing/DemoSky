@@ -31,7 +31,7 @@ public class OkHttpUtils
     private OkHttpClient mOkHttpClient;
     private Platform mPlatform;
 
-    public OkHttpUtils(OkHttpClient okHttpClient)
+    private OkHttpUtils(OkHttpClient okHttpClient)
     {
 
         if (okHttpClient == null)

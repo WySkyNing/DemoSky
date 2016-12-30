@@ -145,23 +145,23 @@ public class MainActivity extends BaseActivity {
 
         //postRequest();
 
-        OkHttpUtils
-                .get()
-                .url("http://www.baidu.com")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-
-                        Log.e("wy_ok",response);
-                    }
-                });
-
+//        OkHttpUtils
+//                .get()
+//                .url("http://www.baidu.com")
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//
+//                        Log.e("wy_ok",response);
+//                    }
+//                });
+//
 
         postRequest();
 
@@ -199,14 +199,15 @@ public class MainActivity extends BaseActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         FormBody formBody = new FormBody.Builder()
-                .add("userPhoneNumber","18842606495")
-                .add("userPassWord","123")
+                .add("userId","18842606495")
+                .add("userCity","大连")
                 .build();
+
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userPhoneNumber","18842606495");
-            jsonObject.put("userPassWord","123");
+            jsonObject.put("userId","7740");
+            jsonObject.put("userCity","大连");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -218,7 +219,7 @@ public class MainActivity extends BaseActivity {
 
         Request request = new Request.Builder()
                 .post(requestBody)
-                .url("http://218.60.28.101/car/API/API_O2_LOGIN_USER")
+                .url("http://218.60.28.101/car/API/API_O2_QUERY_ILLEGAL_SEND_KALU")
                 .build();
 
         Call call = okHttpClient.newCall(request);

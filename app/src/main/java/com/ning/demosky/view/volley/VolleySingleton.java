@@ -30,6 +30,8 @@ public class VolleySingleton {
         }
         queue = getQueue();
         imageLoader = new ImageLoader(queue, new DoubleCache());
+
+        FakeX509TrustManager.allowAllSSL();
     }
 
     public static void init(Context context){

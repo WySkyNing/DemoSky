@@ -6,6 +6,11 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.ning.demosky.R;
 import com.ning.demosky.view.db.DbActivity;
 import com.ning.demosky.view.mvp.Base.BaseActivity;
@@ -18,10 +23,15 @@ import com.ning.demosky.view.provider.ProviderActivity;
 import com.ning.demosky.view.thread.HandlerActivity;
 import com.ning.demosky.view.upapp.UpDataManager;
 import com.ning.demosky.view.utils.L;
+import com.ning.demosky.view.volley.FakeX509TrustManager;
+import com.ning.demosky.view.volley.VolleySingleton;
 import com.ning.mylibrary.view2.CustomViewActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -33,7 +43,6 @@ import okhttp3.Response;
 
 /**
  * Created by wy on 2016/10/11.
- *
  */
 public class MainActivity extends BaseActivity {
 
@@ -163,13 +172,54 @@ public class MainActivity extends BaseActivity {
 //                });
 //
 
+        VolleySingleton.init(MyApplication.appContext);
+        volleyText();
         postRequest();
+
+
+//        RequestQueue queue = Volley.newRequestQueue(MyApplication.appContext);
+//
+//        FakeX509TrustManager.allowAllSSL();
+//
+//        StringRequest request = new StringRequest("https://www.baidu.com",
+//                new com.android.volley.Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        Log.e("volley_", response);
+//
+//                    }
+//                }, new com.android.volley.Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.e("volley_error", error.getMessage());
+//            }
+//        });
+//
+//        queue.add(request);
+
 
 
     }
 
+    private void volleyText() {
 
-    private void getRequset(){
+        VolleySingleton.getInstance()._addRequest("https://www.jd.com/",
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("volley_", response);
+
+                    }
+                }, new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.e("volley_error", error.toString());
+                    }
+                });
+    }
+
+    private void getRequset() {
 
         OkHttpClient mOkHttpClient = new OkHttpClient();
 
@@ -181,33 +231,33 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
 
-                Log.e("wy_no",e.getLocalizedMessage());
+                Log.e("wy_no", e.getLocalizedMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
-                Log.e("wy_ok",response.body().string());
+                Log.e("wy_ok", response.body().string());
             }
         });
     }
 
-    private void postRequest(){
+    private void postRequest() {
 
-        L.e("www","www");
+        L.e("www", "www");
 
         OkHttpClient okHttpClient = new OkHttpClient();
 
         FormBody formBody = new FormBody.Builder()
-                .add("userId","18842606495")
-                .add("userCity","大连")
+                .add("userId", "18842606495")
+                .add("userCity", "大连")
                 .build();
 
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userId","7740");
-            jsonObject.put("userCity","大连");
+            jsonObject.put("userId", "7740");
+            jsonObject.put("userCity", "大连");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -215,7 +265,7 @@ public class MainActivity extends BaseActivity {
 
         MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
 
-        RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON,jsonObject.toString());
+        RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON, jsonObject.toString());
 
         Request request = new Request.Builder()
                 .post(requestBody)
@@ -229,13 +279,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
 
-                Log.e("wy_no",e.getLocalizedMessage());
+                Log.e("wy_no", e.getLocalizedMessage());
             }
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
-                Log.e("wy_ok",response.body().string());
+                Log.e("wy_ok", response.body().string());
 
 
                 runOnUiThread(new Runnable() {

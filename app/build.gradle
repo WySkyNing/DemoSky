@@ -17,12 +17,16 @@ android {
 
     buildTypes {
         release {
+
+            buildConfigField "String", "API_URL", "http://test.example.com/api/"
+
+
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
         }
     }
-    buildToolsVersion '25.0.1'
+    buildToolsVersion '25.0.2'
     compileSdkVersion 25
 
 }
@@ -32,9 +36,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
-    compile 'com.android.support:recyclerview-v7:25.0.1'
+    compile 'com.android.support:recyclerview-v7:25.1.0'
     compile files('libs/AMap3DMap_3.4.0_AMapSearch_3.3.0_AMapLocation_2.7.0_20160809.jar')
     compile 'com.google.code.gson:gson:2.7'
     compile files('libs/universal-image-loader-1.8.6-with-sources.jar')

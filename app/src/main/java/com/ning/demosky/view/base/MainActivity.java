@@ -23,7 +23,6 @@ import com.ning.demosky.view.provider.ProviderActivity;
 import com.ning.demosky.view.thread.HandlerActivity;
 import com.ning.demosky.view.upapp.UpDataManager;
 import com.ning.demosky.view.utils.L;
-import com.ning.demosky.view.volley.FakeX509TrustManager;
 import com.ning.demosky.view.volley.VolleySingleton;
 import com.ning.mylibrary.view2.CustomViewActivity;
 
@@ -172,9 +171,37 @@ public class MainActivity extends BaseActivity {
 //                });
 //
 
-        VolleySingleton.init(MyApplication.appContext);
-        volleyText();
-        postRequest();
+        //VolleySingleton.init(MyApplication.appContext);
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+
+                    while (i < 10100){
+
+                        postRequest();
+
+                        i++;
+
+                        Thread.sleep(2000);
+
+                    }
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+
+        //postRequest();
+
+        //getRequest();
+
 
 
 //        RequestQueue queue = Volley.newRequestQueue(MyApplication.appContext);
@@ -198,32 +225,15 @@ public class MainActivity extends BaseActivity {
 //        queue.add(request);
 
 
-
     }
 
-    private void volleyText() {
+    int i = 10000;
 
-        VolleySingleton.getInstance()._addRequest("https://www.jd.com/",
-                new com.android.volley.Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("volley_", response);
-
-                    }
-                }, new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        Log.e("volley_error", error.toString());
-                    }
-                });
-    }
-
-    private void getRequset() {
+    private void getRequest() {
 
         OkHttpClient mOkHttpClient = new OkHttpClient();
 
-        Request request = new Request.Builder().url("https://www.baidu.com").build();
+        Request request = new Request.Builder().url("http://www.baidu.com").build();
 
         Call call = mOkHttpClient.newCall(request);
 
@@ -244,8 +254,6 @@ public class MainActivity extends BaseActivity {
 
     private void postRequest() {
 
-        L.e("www", "www");
-
         OkHttpClient okHttpClient = new OkHttpClient();
 
         FormBody formBody = new FormBody.Builder()
@@ -253,11 +261,14 @@ public class MainActivity extends BaseActivity {
                 .add("userCity", "大连")
                 .build();
 
-
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userId", "7740");
-            jsonObject.put("userCity", "大连");
+            jsonObject.put("userId", String.valueOf(i));
+//            jsonObject.put("userPhoneNumber", "18842606495");
+//            jsonObject.put("userPassWord", "123");
+
+            Log.e("wy_",String.valueOf(i));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -269,7 +280,7 @@ public class MainActivity extends BaseActivity {
 
         Request request = new Request.Builder()
                 .post(requestBody)
-                .url("http://218.60.28.101/car/API/API_O2_QUERY_ILLEGAL_SEND_KALU")
+                .url("http://api.ocarlife.cn/car/API/API_O2_GET_USER_INFO")
                 .build();
 
         Call call = okHttpClient.newCall(request);
@@ -296,6 +307,7 @@ public class MainActivity extends BaseActivity {
                 });
             }
         });
+
     }
 
 }

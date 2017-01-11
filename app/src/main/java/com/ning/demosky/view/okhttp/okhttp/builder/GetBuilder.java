@@ -1,18 +1,15 @@
 package com.ning.demosky.view.okhttp.okhttp.builder;
 
 import android.net.Uri;
-
-
 import com.ning.demosky.view.okhttp.okhttp.request.GetRequest;
 import com.ning.demosky.view.okhttp.okhttp.request.RequestCall;
-
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 /**
  * Created by zhy on 15/12/14.
+ *
  */
 public class GetBuilder extends OkHttpRequestBuilder<GetBuilder> implements HasParamsable
 {
@@ -27,7 +24,7 @@ public class GetBuilder extends OkHttpRequestBuilder<GetBuilder> implements HasP
         return new GetRequest(url, tag, params, headers,id).build();
     }
 
-    protected String appendParams(String url, Map<String, String> params)
+    private String appendParams(String url, Map<String, String> params)
     {
         if (url == null || params == null || params.isEmpty())
         {
@@ -35,10 +32,7 @@ public class GetBuilder extends OkHttpRequestBuilder<GetBuilder> implements HasP
         }
         Uri.Builder builder = Uri.parse(url).buildUpon();
         Set<String> keys = params.keySet();
-        Iterator<String> iterator = keys.iterator();
-        while (iterator.hasNext())
-        {
-            String key = iterator.next();
+        for (String key : keys) {
             builder.appendQueryParameter(key, params.get(key));
         }
         return builder.build().toString();

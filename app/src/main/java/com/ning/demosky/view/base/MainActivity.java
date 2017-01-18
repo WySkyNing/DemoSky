@@ -29,7 +29,10 @@ import com.ning.mylibrary.view2.CustomViewActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -309,5 +312,31 @@ public class MainActivity extends BaseActivity {
         });
 
     }
+
+    private void writeFile(){
+
+        // 构建指定文件
+        File file = new File("E:" + File.separator + "hello.txt");
+        OutputStream out = null;
+        try {
+            // 根据文件创建文件的输出流
+            out = new FileOutputStream(file);
+            String message = "我是好人。";
+            // 把内容转换成字节数组
+            byte[] data = message.getBytes();
+            // 向文件写入内容
+            out.write(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // 关闭输出流
+                out.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 }

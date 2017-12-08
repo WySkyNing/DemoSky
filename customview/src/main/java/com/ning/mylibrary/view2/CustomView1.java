@@ -119,11 +119,16 @@ public class CustomView1 extends View {
     }
 
     /**
-     * EXACTLY：父元素决定子元素的确切大小，子元素将被限定在给定的边界里而忽略它本身大小(定值 || MATCH_PARENT)
-     * MATCH_PARENT（也是定值），意味着这个视图需要和它父视图一样大的尺寸（减去padding）
+     * widthMeasureSpec  heightMeasureSpec  父级 view 传递给子 view 的可用空间
+     * 该参数表示控件可获得的空间以及关于这个空间描述的元数据.
+     *
+     * EXACTLY：父元素决定子元素的确切大小，(定值 || MATCH_PARENT)（减去padding）
+     *          表示父视图希望子视图的大小应该是由specSize的值来决定的，系统默认会按照这个规则来设置子视图的大小，
+     *          简单的说（当设置width或height为match_parent时，模式为EXACTLY，因为子view会占据剩余容器的空间，所以它大小是确定的） 
      * <p>
-     * AT_MOST：子元素至多达到指定大小的值，一般为WARP_CONTENT
-     * WRAP_CONTENT，意味着这个视图需要足够装下内容的尺寸（加上padding）
+     * AT_MOST：子元素至多达到指定大小的值，一般为—（WARP_CONTENT）（加上padding）
+     *          表示子视图最多只能是specSize中指定的大小。（当设置为wrap_content时，模式为AT_MOST, 表示子view的大小最多是多少，
+     *          这样子view会根据这个上限来设置自己的尺寸）
      * <p>
      * UNSPECIFIED：父元素不对子元素施加任何束缚，子元素可以得到任意想要的大小
      *
